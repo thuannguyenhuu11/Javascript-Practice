@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>About Me</title>
+  </head>
+  <body>
+    <h1>About Me</h1>
+
+    <ul>
+      <li>Nickname: <span id="nickname"></span></li>
+      <li>Favorites: <span id="favorites"></span></li>
+      <li>Hometown: <span id="hometown"></span></li>
+    </ul>
+
+    <script>
+      document.body.style.fontFamily = "Arial, sans-serif";
+      document.getElementById("nickname").innerHTML = "Thuan Nguyen";
+      document.getElementById("favorites").innerHTML = "22";
+      document.getElementById("hometown").innerHTML = "Danang, Vietnam";
+      var items = document.getElementsByTagName("li");
+      for (var i = 0; i < items.length; i++) {
+        items[i].className = "listitem";
+      }
+
+      var myPic = document.createElement("img");
+      myPic.src = "https://resizing.flixster.com/C0pQsHJAbmGNexFy6x0_PBYgYAw=/218x280/v2/https://flxt.tmsimg.com/assets/1443_v9_bc.jpg";
+      document.body.appendChild(myPic);
+    </script>
+  </body>
+</html>
