@@ -47,7 +47,7 @@
   flex-direction: column;
 }
 
-.modal__inputs__field > p {
+.modal__inputs__field > label {
   margin-bottom: 13px;
 }
 
