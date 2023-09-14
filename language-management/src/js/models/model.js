@@ -2,14 +2,18 @@ import Event from "../events/event";
 
 class Model {
   constructor() {
-    this.addContactEvent = new Event();
+    this.openContactEvent = new Event();
+    this.closeModalEvent = new Event();
   }
 
-  add() {
-    // Your logic for adding a contact goes here.
-    // For example, add a contact to a list.
-    // You can trigger the event after the action is done.
-    this.addContactEvent.trigger();
+  open() {
+    // logic for opening modal add-contact.
+    this.openModalEvent.trigger();
+  }
+
+  close() {
+    // logic for closing modal add-contact.
+    this.closeModalEvent.trigger();
   }
 }
 
