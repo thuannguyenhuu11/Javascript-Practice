@@ -5,7 +5,7 @@ import Controller from "./controllers/controller";
 export class App {
   constructor() {}
 
-  start() {
+  async startApp() {
     const controller = new Controller(new Model(), new View());
     controller.init();
   }
