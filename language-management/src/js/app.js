@@ -1,12 +1,5 @@
-import View from "./views/view";
-import Model from "./models/model";
 import Controller from "./controllers/controller";
 
-export class App {
-  constructor() {}
+const app = new Controller();
 
-  async startApp() {
-    const controller = new Controller(new Model(), new View());
-    controller.init();
-  }
-}
+app.run();

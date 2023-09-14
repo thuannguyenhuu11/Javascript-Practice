@@ -1,30 +1,23 @@
+import Event from "../events/event";
+
 class ModalView {
   constructor() {
-    this.modalEl = document.querySelector(".modal");
-    this.overlayEl = document.querySelector(".overlay");
-    this.addBtnEl = document.querySelector(".features__add");
-    this.cancelBtnEl = document.querySelector(".modal__top__btn");
-  }
+    this.addEvent = new Event();
+    this.addButton = document.querySelector(".features__add");
+    this.modal = document.querySelector(".modal");
+    this.overlay = document.querySelector(".overlay");
 
-  //----- RENDERING -----//
-  renderModal() {
-    this.modalEl.classList.add("modal--active");
-    this.overlayEl.classList.add("overlay--active");
-  }
+    this.addButton.addEventListener("click", () => {
+      // Add your logic here to handle the button click event.
+      // For example, add the 'modal--active' class to the modal.
+      this.modal.classList.add("modal--active");
+      // Add the 'overlay--active' class to the overlay.
+      this.overlay.classList.add("overlay--active");
 
-  //----- EVENT HANDLER -----//
-  addEventAddContact = addContact => {
-    this.addBtnEl.addEventListener("click", () => {
-      addContact();
+      // Trigger the add event after the action is done.
+      this.addEvent.trigger();
     });
-  };
-
-  addEventCancelModal = () => {
-    this.cancelBtnEl.addEventListener("click", () => {
-      this.modalEl.classList.remove("modal--active");
-      this.overlayEl.classList.remove("overlay--active");
-    });
-  };
+  }
 }
 
 export default ModalView;
