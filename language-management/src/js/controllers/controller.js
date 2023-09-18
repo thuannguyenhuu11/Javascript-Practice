@@ -8,7 +8,7 @@ class Controller {
 
     // Connect the view addEvent to the model add method.
     this.view.openEvent.addListener(() => {
-      this.model.add();
+      this.model.open();
     });
 
     // Connect the view closeEvent to the model close method.
