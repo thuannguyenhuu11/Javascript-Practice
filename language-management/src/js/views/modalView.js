@@ -10,23 +10,25 @@ class ModalView {
     this.addBtnEl = document.querySelector(".features__add");
     this.cancelBtnEl = document.querySelector(".modal__buttons__cancel");
 
-    //Handle open ADD-modal
-    this.handleOpenAddModal = () => {
-      this.modalEl.classList.add("modal--active");
-      this.overlayEl.classList.add("overlay--active");
-      this.openEvent.trigger();
-    };
+    // Attach event to the New-button using the handleOpenAddModal method
+    this.addBtnEl.addEventListener("click", this.handleOpenAddModal.bind(this));
 
-    this.addBtnEl.addEventListener("click", this.handleOpenAddModal);
+    // Attach event to the Cancel-button using the handleCloseAddModal method
+    this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal.bind(this));
+  }
 
-    //Handle close ADD-modal
-    this.handleCloseAddModal = () => {
-      this.modalEl.classList.remove("modal--active");
-      this.overlayEl.classList.remove("overlay--active");
-      this.closeEvent.trigger();
-    };
+  // Handle open ADD-modal
+  handleOpenAddModal() {
+    this.modalEl.classList.add("modal--active");
+    this.overlayEl.classList.add("overlay--active");
+    this.openEvent.trigger();
+  }
 
-    this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal);
+  // Handle close ADD-modal
+  handleCloseAddModal() {
+    this.modalEl.classList.remove("modal--active");
+    this.overlayEl.classList.remove("overlay--active");
+    this.closeEvent.trigger();
   }
 
   //Handle render logic
