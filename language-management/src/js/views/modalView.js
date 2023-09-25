@@ -11,6 +11,12 @@ class ModalView {
     this.addBtnEl = document.querySelector(".features__add");
     this.cancelBtnEl = document.querySelector(".modal__buttons__cancel");
 
+    // Attach event to the New-button using the handleOpenAddModal method
+    this.addBtnEl.addEventListener("click", this.handleOpenAddModal.bind(this));
+
+    // Attach event to the Cancel-button using the handleCloseAddModal method
+    this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal.bind(this));
+
     this.nameInput = this.modalEl.name;
     this.nameError = this.nameInput.nextElementSibling;
     this.phoneInput = this.modalEl.phone;
@@ -19,12 +25,6 @@ class ModalView {
     this.emailError = this.emailInput.nextElementSibling;
     this.avatarInput = this.modalEl.avatar;
     this.avatarError = this.avatarInput.nextElementSibling;
-
-    // Attach event to the New-button using the handleOpenAddModal method
-    this.addBtnEl.addEventListener("click", this.handleOpenAddModal.bind(this));
-
-    // Attach event to the Cancel-button using the handleCloseAddModal method
-    this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal.bind(this));
   }
 
   // Handle open ADD-modal
