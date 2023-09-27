@@ -15,6 +15,14 @@ class Controller {
     this.view.closeEvent.addListener(() => {
       this.model.close();
     });
+
+    this.view.formEvent.addListener(() => {
+      this.model.handle();
+    });
+  }
+
+  run() {
+    this.view.handleSubmit();
   }
 }
 

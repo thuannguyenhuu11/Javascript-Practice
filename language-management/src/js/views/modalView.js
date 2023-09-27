@@ -5,6 +5,7 @@ class ModalView {
   constructor() {
     this.openEvent = new Event();
     this.closeEvent = new Event();
+    this.formEvent = new Event();
 
     this.modalEl = document.querySelector(".modal");
     this.overlayEl = document.querySelector(".overlay");
@@ -25,6 +26,8 @@ class ModalView {
     this.emailError = this.emailInput.nextElementSibling;
     this.avatarInput = this.modalEl.avatar;
     this.avatarError = this.avatarInput.nextElementSibling;
+
+    this.modalEl.addEventListener("submit", this.handleSubmit.bind(this));
   }
 
   // Handle open ADD-modal
@@ -41,60 +44,81 @@ class ModalView {
     this.closeEvent.trigger();
   }
 
-  //Handle render logic
-  render() {}
+  handleSubmit(e) {
+    e.preventDefault();
+    this.validateForm();
+    this.formEvent.trigger();
+  }
 
   //----- VALIDATE FORM -----//
-  validateForm(name, phone, email) {
+
+  validateForm() {
     // Expressions for validation
     const nameRegex = /^[a-zA-Z\s]+$/;
     const phoneRegex = /^\d{10}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    // Get values from the input fields
+    const name = this.nameInput.value;
+    const phone = this.phoneInput.value;
+    const email = this.emailInput.value;
+
     // Validation checks
-    const isNameValid = nameRegex.test(name);
-    const isPhoneValid = phoneRegex.test(phone);
-    const isEmailValid = emailRegex.test(email);
+    let isValid = true;
+
+    // Clear any previous error messages and styles
+    this.modalEl.name.classList.remove("input--warning");
+    this.nameError.textContent = "";
+    this.modalEl.phone.classList.remove("input--warning");
+    this.phoneError.textContent = "";
+    this.modalEl.email.classList.remove("input--warning");
+    this.emailError.textContent = "";
 
     if (name.trim() === "") {
       this.modalEl.name.classList.add("input--warning");
       this.nameError.textContent = `${MESSAGE.NAME_REQUIRED}`;
       this.nameError.classList.add("warning-text--active");
-      return false;
-    } else if (!isNameValid) {
+      isValid = false;
+    } else if (!nameRegex.test(name)) {
       this.modalEl.name.classList.add("input--warning");
       this.nameError.textContent = `${MESSAGE.INVALID_NAME}`;
       this.nameError.classList.add("warning-text--active");
-      return false;
+      isValid = false;
     }
 
     if (phone.trim() === "") {
       this.modalEl.phone.classList.add("input--warning");
       this.phoneError.textContent = `${MESSAGE.PHONE_REQUIRED}`;
       this.phoneError.classList.add("warning-text--active");
-      return false;
-    } else if (!isPhoneValid) {
+      isValid = false;
+    } else if (!phoneRegex.test(phone)) {
       this.modalEl.phone.classList.add("input--warning");
       this.phoneError.textContent = `${MESSAGE.INVALID_PHONE}`;
       this.phoneError.classList.add("warning-text--active");
-      return false;
+      isValid = false;
     }
 
     if (email.trim() === "") {
       this.modalEl.email.classList.add("input--warning");
       this.emailError.textContent = `${MESSAGE.EMAIL_REQUIRED}`;
       this.emailError.classList.add("warning-text--active");
-      return false;
-    } else if (!isEmailValid) {
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
       this.modalEl.email.classList.add("input--warning");
       this.emailError.textContent = `${MESSAGE.INVALID_EMAIL}`;
       this.emailError.classList.add("warning-text--active");
-      return false;
+      isValid = false;
     }
 
-    this.modalEl.reset();
-    return true;
+    if (isValid) {
+      this.modalEl.reset();
+    }
+
+    return isValid;
   }
+
+  //Handle render logic
+  render() {}
 }
 
 export default ModalView;
