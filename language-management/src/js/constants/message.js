@@ -8,6 +8,8 @@ export const MESSAGE = {
   INVALID_EMAIL: "The email address is invalid",
   AVATAR_REQUIRED: "The avatar is required",
   INVALID_AVATAR: "The avatar is invalid",
+  RELATION_REQUIRED: "The relation is required",
+  INVALID_RELATION: "The relation is invalid",
 };
 
 //Regex for form validator.

@@ -20,6 +20,8 @@ class ModalView {
 
     this.nameInput = this.modalEl.name;
     this.nameError = this.nameInput.nextElementSibling;
+    this.relationInput = this.modalEl.relation;
+    this.relationError = this.relationInput.nextElementSibling;
     this.phoneInput = this.modalEl.phone;
     this.phoneError = this.phoneInput.nextElementSibling;
     this.emailInput = this.modalEl.email;
@@ -41,6 +43,19 @@ class ModalView {
   handleCloseAddModal() {
     this.modalEl.classList.remove("modal--active");
     this.overlayEl.classList.remove("overlay--active");
+
+    // Clear any previous error messages and styles
+    this.modalEl.name.classList.remove("input--warning");
+    this.nameError.textContent = "";
+    this.modalEl.phone.classList.remove("input--warning");
+    this.phoneError.textContent = "";
+    this.modalEl.email.classList.remove("input--warning");
+    this.emailError.textContent = "";
+    this.modalEl.avatar.classList.remove("input--warning");
+    this.avatarError.textContent = "";
+    this.modalEl.relation.classList.remove("input--warning");
+    this.relationError.textContent = "";
+
     this.closeEvent.trigger();
   }
 
@@ -62,6 +77,8 @@ class ModalView {
     const name = this.nameInput.value;
     const phone = this.phoneInput.value;
     const email = this.emailInput.value;
+    const avatar = this.avatarInput.value;
+    const relation = this.relationInput.value;
 
     // Validation checks
     let isValid = true;
@@ -73,6 +90,10 @@ class ModalView {
     this.phoneError.textContent = "";
     this.modalEl.email.classList.remove("input--warning");
     this.emailError.textContent = "";
+    this.modalEl.avatar.classList.remove("input--warning");
+    this.avatarError.textContent = "";
+    this.modalEl.relation.classList.remove("input--warning");
+    this.relationError.textContent = "";
 
     if (name.trim() === "") {
       this.modalEl.name.classList.add("input--warning");
@@ -107,6 +128,30 @@ class ModalView {
       this.modalEl.email.classList.add("input--warning");
       this.emailError.textContent = `${MESSAGE.INVALID_EMAIL}`;
       this.emailError.classList.add("warning-text--active");
+      isValid = false;
+    }
+
+    if (avatar.trim() === "") {
+      this.modalEl.avatar.classList.add("input--warning");
+      this.avatarError.textContent = `${MESSAGE.AVATAR_REQUIRED}`;
+      this.avatarError.classList.add("warning-text--active");
+      isValid = false;
+    } else if (!nameRegex.test(avatar)) {
+      this.modalEl.avatar.classList.add("input--warning");
+      this.avatarError.textContent = `${MESSAGE.INVALID_AVATAR}`;
+      this.avatarError.classList.add("warning-text--active");
+      isValid = false;
+    }
+
+    if (relation.trim() === "") {
+      this.modalEl.relation.classList.add("input--warning");
+      this.relationError.textContent = `${MESSAGE.RELATION_REQUIRED}`;
+      this.relationError.classList.add("warning-text--active");
+      isValid = false;
+    } else if (!nameRegex.test(relation)) {
+      this.modalEl.relation.classList.add("input--warning");
+      this.relationError.textContent = `${MESSAGE.INVALID_RELATION}`;
+      this.relationrError.classList.add("warning-text--active");
       isValid = false;
     }
 
