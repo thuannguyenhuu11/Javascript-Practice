@@ -46,6 +46,7 @@ class AddEditAddressModal {
 
     // Clear any previous error messages and styles
     this.resetModal();
+    this.modalEl.reset();
 
     this.closeEvent.trigger();
   }
