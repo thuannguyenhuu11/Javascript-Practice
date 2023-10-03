@@ -18,17 +18,6 @@ class AddEditAddressModal {
     // Attach event to the Cancel-button using the handleCloseAddModal method
     this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal.bind(this));
 
-    this.nameInput = this.modalEl.name;
-    this.nameError = this.nameInput.nextElementSibling;
-    this.relationInput = this.modalEl.relation;
-    this.relationError = this.relationInput.nextElementSibling;
-    this.phoneInput = this.modalEl.phone;
-    this.phoneError = this.phoneInput.nextElementSibling;
-    this.emailInput = this.modalEl.email;
-    this.emailError = this.emailInput.nextElementSibling;
-    this.avatarInput = this.modalEl.avatar;
-    this.avatarError = this.avatarInput.nextElementSibling;
-
     this.modalEl.addEventListener("submit", this.handleSubmit.bind(this));
   }
 
@@ -61,79 +50,56 @@ class AddEditAddressModal {
 
   validateForm() {
     // Get values from the input fields
-    const name = this.nameInput.value;
-    const phone = this.phoneInput.value;
-    const email = this.emailInput.value;
-    const avatar = this.avatarInput.value;
-    const relation = this.relationInput.value;
+    const modalEl = document.querySelector(".modal");
+    const nameInput = modalEl.name;
+    const nameError = nameInput.nextElementSibling;
+    const relationInput = modalEl.relation;
+    const relationError = relationInput.nextElementSibling;
+    const phoneInput = modalEl.phone;
+    const phoneError = phoneInput.nextElementSibling;
+    const emailInput = modalEl.email;
+    const emailError = emailInput.nextElementSibling;
+    const avatarInput = modalEl.avatar;
+    const avatarError = avatarInput.nextElementSibling;
 
-    // Validation checks
     let isValid = true;
 
-    this.resetModal();
+    // Object to store field validation data
+    const fields = [
+      { name: "name", regex: REGEX.NAME, error: nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
+      { name: "relation", regex: REGEX.NAME, error: relationError, requiredMessage: MESSAGE.RELATION_REQUIRED, invalidMessage: MESSAGE.INVALID_RELATION },
+      { name: "phone", regex: REGEX.PHONE, error: phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
+      { name: "email", regex: REGEX.EMAIL, error: emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
+      { name: "avatar", regex: REGEX.AVATAR, error: avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
+    ];
 
-    if (name.trim() === "") {
-      this.modalEl.name.classList.add("input--warning");
-      this.nameError.textContent = `${MESSAGE.NAME_REQUIRED}`;
-      this.nameError.classList.add("warning-text--active");
-      isValid = false;
-    } else if (!REGEX.NAME.test(name)) {
-      this.modalEl.name.classList.add("input--warning");
-      this.nameError.textContent = `${MESSAGE.INVALID_NAME}`;
-      this.nameError.classList.add("warning-text--active");
-      isValid = false;
-    }
+    // Loop through each field to perform validation
+    for (const field of fields) {
+      const value = field.name;
+      const isValidField = field.regex.test(value);
+      const inputEl = modalEl[field.name];
+      const errorEl = field.error;
 
-    if (phone.trim() === "") {
-      this.modalEl.phone.classList.add("input--warning");
-      this.phoneError.textContent = `${MESSAGE.PHONE_REQUIRED}`;
-      this.phoneError.classList.add("warning-text--active");
-      isValid = false;
-    } else if (!REGEX.PHONE.test(phone)) {
-      this.modalEl.phone.classList.add("input--warning");
-      this.phoneError.textContent = `${MESSAGE.INVALID_PHONE}`;
-      this.phoneError.classList.add("warning-text--active");
-      isValid = false;
-    }
-
-    if (email.trim() === "") {
-      this.modalEl.email.classList.add("input--warning");
-      this.emailError.textContent = `${MESSAGE.EMAIL_REQUIRED}`;
-      this.emailError.classList.add("warning-text--active");
-      isValid = false;
-    } else if (!REGEX.EMAIL.test(email)) {
-      this.modalEl.email.classList.add("input--warning");
-      this.emailError.textContent = `${MESSAGE.INVALID_EMAIL}`;
-      this.emailError.classList.add("warning-text--active");
-      isValid = false;
-    }
-
-    if (avatar.trim() === "") {
-      this.modalEl.avatar.classList.add("input--warning");
-      this.avatarError.textContent = `${MESSAGE.AVATAR_REQUIRED}`;
-      this.avatarError.classList.add("warning-text--active");
-      isValid = false;
-    } else if (!REGEX.NAME.test(avatar)) {
-      this.modalEl.avatar.classList.add("input--warning");
-      this.avatarError.textContent = `${MESSAGE.INVALID_AVATAR}`;
-      this.avatarError.classList.add("warning-text--active");
-      isValid = false;
-    }
-
-    if (relation.trim() === "") {
-      this.modalEl.relation.classList.add("input--warning");
-      this.relationError.textContent = `${MESSAGE.RELATION_REQUIRED}`;
-      this.relationError.classList.add("warning-text--active");
-      isValid = false;
-    } else if (!REGEX.NAME.test(relation)) {
-      this.modalEl.relation.classList.add("input--warning");
-      this.relationError.textContent = `${MESSAGE.INVALID_RELATION}`;
-      this.relationrError.classList.add("warning-text--active");
-      isValid = false;
-    }
-
-    if (isValid) {
-      this.modalEl.reset();
+      // Check if the field value is empty
+      if (value.trim() === "") {
+        inputEl.classList.add("input--warning");
+        errorEl.textContent = field.requiredMessage;
+        errorEl.classList.add("warning-text--active");
+        isValid = false;
+      }
+      // Check if the field value matches the regex pattern
+      else if (!isValidField) {
+        inputEl.classList.add("input--warning");
+        errorEl.textContent = field.invalidMessage;
+        errorEl.classList.add("warning-text--active");
+        isValid = false;
+      }
+      // If the field is valid, remove any warning styling and message
+      else {
+        inputEl.classList.remove("input--warning");
+        errorEl.textContent = "";
+        errorEl.classList.remove("warning-text--active");
+      }
     }
 
     return isValid;
