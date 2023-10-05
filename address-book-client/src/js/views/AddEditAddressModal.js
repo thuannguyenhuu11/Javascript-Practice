@@ -18,6 +18,17 @@ class AddEditAddressModal {
     // Attach event to the Cancel-button using the handleCloseAddModal method
     this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal.bind(this));
 
+    this.nameInput = this.modalEl.name;
+    this.nameError = this.nameInput.nextElementSibling;
+    this.relationInput = this.modalEl.relation;
+    this.relationError = this.relationInput.nextElementSibling;
+    this.phoneInput = this.modalEl.phone;
+    this.phoneError = this.phoneInput.nextElementSibling;
+    this.emailInput = this.modalEl.email;
+    this.emailError = this.emailInput.nextElementSibling;
+    this.avatarInput = this.modalEl.avatar;
+    this.avatarError = this.avatarInput.nextElementSibling;
+
     this.modalEl.addEventListener("submit", this.handleSubmit.bind(this));
   }
 
@@ -64,6 +75,8 @@ class AddEditAddressModal {
 
     let isValid = true;
 
+    this.resetModal();
+
     // Object to store field validation data
     const fields = [
       { name: "name", regex: REGEX.NAME, error: nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
@@ -75,10 +88,11 @@ class AddEditAddressModal {
 
     // Loop through each field to perform validation
     for (const field of fields) {
-      const value = field.name;
-      const isValidField = field.regex.test(value);
       const inputEl = modalEl[field.name];
       const errorEl = field.error;
+      const value = inputEl.value;
+
+      const isValidField = field.regex.test(value);
 
       // Check if the field value is empty
       if (value.trim() === "") {
