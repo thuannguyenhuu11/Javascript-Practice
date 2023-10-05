@@ -20,10 +20,6 @@ class Controller {
       this.model.handle();
     });
   }
-
-  run() {
-    this.view.handleSubmit();
-  }
 }
 
 export default Controller;
