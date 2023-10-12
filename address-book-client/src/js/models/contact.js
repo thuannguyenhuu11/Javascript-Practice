@@ -1,6 +1,6 @@
 import Event from "../events/event";
 
-class Card {
+class ContactModel {
   constructor() {
     this.openContactEvent = new Event();
     this.closeModalEvent = new Event();
@@ -22,4 +22,4 @@ class Card {
   }
 }
 
-export default Card;
+export default ContactModel;
