@@ -94,29 +94,32 @@ class AddEditAddressModal {
 
       const isValidField = field.regex.test(value);
 
-      // Check if the field value is empty
+      // Validate field and show error message if needed
       if (value.trim() === "") {
-        inputEl.classList.add("input--warning");
-        errorEl.textContent = field.requiredMessage;
-        errorEl.classList.add("warning-text--active");
+        this.showErrorMessage(inputEl, errorEl, field.requiredMessage);
         isValid = false;
-      }
-      // Check if the field value matches the regex pattern
-      else if (!isValidField) {
-        inputEl.classList.add("input--warning");
-        errorEl.textContent = field.invalidMessage;
-        errorEl.classList.add("warning-text--active");
+      } else if (!isValidField) {
+        this.showErrorMessage(inputEl, errorEl, field.invalidMessage);
         isValid = false;
-      }
-      // If the field is valid, remove any warning styling and message
-      else {
-        inputEl.classList.remove("input--warning");
-        errorEl.textContent = "";
-        errorEl.classList.remove("warning-text--active");
+      } else {
+        this.clearErrorMessage(inputEl, errorEl);
       }
     }
 
     return isValid;
+  }
+  // Method to show error message and apply warning styling
+  showErrorMessage(inputElement, errorElement, errorMessage) {
+    inputElement.classList.add("input--warning");
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add("warning-text--active");
+  }
+
+  // Method to clear error message and remove warning styling
+  clearErrorMessage(inputElement, errorElement) {
+    inputElement.classList.remove("input--warning");
+    errorElement.textContent = "";
+    errorElement.classList.remove("warning-text--active");
   }
 
   // Clear any previous error messages and styles
