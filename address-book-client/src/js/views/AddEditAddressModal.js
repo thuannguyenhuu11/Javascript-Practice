@@ -79,17 +79,17 @@ class AddEditAddressModal {
 
     // Object to store field validation data
     const fields = [
-      { name: "name", regex: REGEX.NAME, error: nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
-      { name: "relation", regex: REGEX.NAME, error: relationError, requiredMessage: MESSAGE.RELATION_REQUIRED, invalidMessage: MESSAGE.INVALID_RELATION },
-      { name: "phone", regex: REGEX.PHONE, error: phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
-      { name: "email", regex: REGEX.EMAIL, error: emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
-      { name: "avatar", regex: REGEX.AVATAR, error: avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
+      { name: "name", regex: REGEX.NAME, errorElement: nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
+      { name: "relation", regex: REGEX.NAME, errorElement: relationError, requiredMessage: MESSAGE.RELATION_REQUIRED, invalidMessage: MESSAGE.INVALID_RELATION },
+      { name: "phone", regex: REGEX.PHONE, errorElement: phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
+      { name: "email", regex: REGEX.EMAIL, errorElement: emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
+      { name: "avatar", regex: REGEX.AVATAR, errorElement: avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
     ];
 
     // Loop through each field to perform validation
     for (const field of fields) {
       const inputEl = modalEl[field.name];
-      const errorEl = field.error;
+      const errorEl = field.errorElement;
       const value = inputEl.value;
 
       const isValidField = field.regex.test(value);
