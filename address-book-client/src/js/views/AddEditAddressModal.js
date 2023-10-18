@@ -60,35 +60,22 @@ class AddEditAddressModal {
   //----- VALIDATE FORM -----//
 
   validateForm() {
-    // Get values from the input fields
-    const modalEl = document.querySelector(".modal");
-    const nameInput = modalEl.name;
-    const nameError = nameInput.nextElementSibling;
-    const relationInput = modalEl.relation;
-    const relationError = relationInput.nextElementSibling;
-    const phoneInput = modalEl.phone;
-    const phoneError = phoneInput.nextElementSibling;
-    const emailInput = modalEl.email;
-    const emailError = emailInput.nextElementSibling;
-    const avatarInput = modalEl.avatar;
-    const avatarError = avatarInput.nextElementSibling;
-
     let isValid = true;
 
     this.resetModal();
 
     // Object to store field validation data
     const fields = [
-      { name: "name", regex: REGEX.NAME, errorElement: nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
-      { name: "relation", regex: REGEX.NAME, errorElement: relationError, requiredMessage: MESSAGE.RELATION_REQUIRED, invalidMessage: MESSAGE.INVALID_RELATION },
-      { name: "phone", regex: REGEX.PHONE, errorElement: phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
-      { name: "email", regex: REGEX.EMAIL, errorElement: emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
-      { name: "avatar", regex: REGEX.AVATAR, errorElement: avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
+      { name: "name", regex: REGEX.NAME, errorElement: this.nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
+      { name: "relation", regex: REGEX.NAME, errorElement: this.relationError, requiredMessage: MESSAGE.RELATION_REQUIRED, invalidMessage: MESSAGE.INVALID_RELATION },
+      { name: "phone", regex: REGEX.PHONE, errorElement: this.phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
+      { name: "email", regex: REGEX.EMAIL, errorElement: this.emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
+      { name: "avatar", regex: REGEX.AVATAR, errorElement: this.avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
     ];
 
     // Loop through each field to perform validation
     for (const field of fields) {
-      const inputEl = modalEl[field.name];
+      const inputEl = this.modalEl[field.name];
       const errorEl = field.errorElement;
       const value = inputEl.value;
 
@@ -96,13 +83,13 @@ class AddEditAddressModal {
 
       // Validate field and show error message if needed
       if (value.trim() === "") {
-        this.showErrorMessage(inputEl, errorEl, field.requiredMessage);
+        this.showErrorMessage(inputEl, field.errorElement, field.requiredMessage);
         isValid = false;
       } else if (!isValidField) {
-        this.showErrorMessage(inputEl, errorEl, field.invalidMessage);
+        this.showErrorMessage(inputEl, field.errorElement, field.invalidMessage);
         isValid = false;
       } else {
-        this.clearErrorMessage(inputEl, errorEl);
+        this.clearErrorMessage(inputEl, field.errorElement);
       }
     }
 
