@@ -1,4 +1,4 @@
-import Controller from "./controllers/controller";
+import Controller from "./controllers/addressController";
 
 const app = new Controller();
 
