@@ -5,7 +5,6 @@ class AddEditAddressModal {
   constructor() {
     this.openEvent = new Event();
     this.closeEvent = new Event();
-    this.formEvent = new Event();
 
     this.modalEl = document.querySelector(".modal");
     this.overlayEl = document.querySelector(".overlay");
@@ -54,7 +53,6 @@ class AddEditAddressModal {
   handleSubmit(e) {
     e.preventDefault();
     this.validateForm();
-    this.formEvent.trigger();
   }
 
   //----- VALIDATE FORM -----//
@@ -76,7 +74,6 @@ class AddEditAddressModal {
     // Loop through each field to perform validation
     for (const field of fields) {
       const inputEl = this.modalEl[field.name];
-      const errorEl = field.errorElement;
       const value = inputEl.value;
 
       const isValidField = field.regex.test(value);
