@@ -1,5 +1,5 @@
-import Controller from "./controllers/addressController";
+import AddressController from "./controllers/addressController";
 
-const app = new Controller();
+const app = new AddressController();
 
 app.run();

@@ -1,11 +1,11 @@
 import Model from "../models/model";
 import View from "../views/view";
 
-class Controller {
+class AddressController {
   constructor() {
     this.model = new Model();
     this.view = new View();
   }
 }
 
-export default Controller;
+export default AddressController;

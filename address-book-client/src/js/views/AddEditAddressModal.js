@@ -11,6 +11,15 @@ class AddEditAddressModal {
     this.addBtnEl = document.querySelector(".features__add");
     this.cancelBtnEl = document.querySelector(".modal__buttons__cancel");
 
+    // Object to store field validation data
+    this.fields = [
+      { name: "name", regex: REGEX.NAME, errorElement: this.nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
+      { name: "relation", regex: REGEX.NAME, errorElement: this.relationError, requiredMessage: MESSAGE.RELATION_REQUIRED, invalidMessage: MESSAGE.INVALID_RELATION },
+      { name: "phone", regex: REGEX.PHONE, errorElement: this.phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
+      { name: "email", regex: REGEX.EMAIL, errorElement: this.emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
+      { name: "avatar", regex: REGEX.AVATAR, errorElement: this.avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
+    ];
+
     // Attach event to the New-button using the handleOpenAddModal method
     this.addBtnEl.addEventListener("click", this.handleOpenAddModal.bind(this));
 
@@ -62,17 +71,8 @@ class AddEditAddressModal {
 
     this.resetModal();
 
-    // Object to store field validation data
-    const fields = [
-      { name: "name", regex: REGEX.NAME, errorElement: this.nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
-      { name: "relation", regex: REGEX.NAME, errorElement: this.relationError, requiredMessage: MESSAGE.RELATION_REQUIRED, invalidMessage: MESSAGE.INVALID_RELATION },
-      { name: "phone", regex: REGEX.PHONE, errorElement: this.phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
-      { name: "email", regex: REGEX.EMAIL, errorElement: this.emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
-      { name: "avatar", regex: REGEX.AVATAR, errorElement: this.avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
-    ];
-
     // Loop through each field to perform validation
-    for (const field of fields) {
+    for (const field of this.fields) {
       const inputEl = this.modalEl[field.name];
       const value = inputEl.value;
 
@@ -119,9 +119,6 @@ class AddEditAddressModal {
     this.modalEl.relation.classList.remove("input--warning");
     this.relationError.textContent = "";
   }
-
-  //Handle render logic
-  render() {}
 }
 
 export default AddEditAddressModal;
