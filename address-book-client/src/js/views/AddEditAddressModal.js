@@ -11,6 +11,17 @@ class AddEditAddressModal {
     this.addBtnEl = document.querySelector(".features__add");
     this.cancelBtnEl = document.querySelector(".modal__buttons__cancel");
 
+    this.nameInput = this.modalEl.name;
+    this.nameError = this.nameInput.nextElementSibling;
+    this.relationInput = this.modalEl.relation;
+    this.relationError = this.relationInput.nextElementSibling;
+    this.phoneInput = this.modalEl.phone;
+    this.phoneError = this.phoneInput.nextElementSibling;
+    this.emailInput = this.modalEl.email;
+    this.emailError = this.emailInput.nextElementSibling;
+    this.avatarInput = this.modalEl.avatar;
+    this.avatarError = this.avatarInput.nextElementSibling;
+
     // Object to store field validation data
     this.fields = [
       { name: "name", regex: REGEX.NAME, errorElement: this.nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
@@ -25,17 +36,6 @@ class AddEditAddressModal {
 
     // Attach event to the Cancel-button using the handleCloseAddModal method
     this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal.bind(this));
-
-    this.nameInput = this.modalEl.name;
-    this.nameError = this.nameInput.nextElementSibling;
-    this.relationInput = this.modalEl.relation;
-    this.relationError = this.relationInput.nextElementSibling;
-    this.phoneInput = this.modalEl.phone;
-    this.phoneError = this.phoneInput.nextElementSibling;
-    this.emailInput = this.modalEl.email;
-    this.emailError = this.emailInput.nextElementSibling;
-    this.avatarInput = this.modalEl.avatar;
-    this.avatarError = this.avatarInput.nextElementSibling;
 
     this.modalEl.addEventListener("submit", this.handleSubmit.bind(this));
   }
@@ -108,16 +108,14 @@ class AddEditAddressModal {
 
   // Clear any previous error messages and styles
   resetModal() {
-    this.modalEl.name.classList.remove("input--warning");
-    this.nameError.textContent = "";
-    this.modalEl.phone.classList.remove("input--warning");
-    this.phoneError.textContent = "";
-    this.modalEl.email.classList.remove("input--warning");
-    this.emailError.textContent = "";
-    this.modalEl.avatar.classList.remove("input--warning");
-    this.avatarError.textContent = "";
-    this.modalEl.relation.classList.remove("input--warning");
-    this.relationError.textContent = "";
+    for (const field of this.fields) {
+      const inputElement = this.modalEl[field.name];
+      const errorElement = field.errorElement;
+
+      inputElement.classList.remove("input--warning");
+      errorElement.textContent = "";
+      errorElement.classList.remove("warning-text--active");
+    }
   }
 }
 
