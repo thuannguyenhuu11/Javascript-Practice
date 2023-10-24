@@ -34,27 +34,3 @@
     <button type="button" class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">Cancel</button>
   </div>
 </form>
-
-<script>
-  var phoneInput = document.getElementById("phone");
-
-  phoneInput.addEventListener("keydown", function (event) {
-    //Get the key pressed code
-    var keyCode = event.keyCode || event.which;
-
-    // Allows keys and number keys from 0 to 9
-    if (
-      (keyCode >= 48 && keyCode <= 57) || // Number keys from 0 to 9
-      (keyCode >= 96 && keyCode <= 105) || // Phím số từ bàn phím số trên bên phải
-      keyCode === 37 || // Left arrow key
-      keyCode === 39 || // Right arrow key
-      keyCode === 8 || //  Backspace key
-      keyCode === 46 //  Delete key
-    ) {
-      // Allow input
-    } else {
-      // Prevents entering non-numeric characters
-      event.preventDefault();
-    }
-  });
-</script>

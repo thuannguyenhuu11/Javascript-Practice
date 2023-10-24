@@ -3,6 +3,9 @@ import { MESSAGE, REGEX } from "../constants/message";
 
 class AddEditAddressModal {
   constructor() {
+    /**
+     * Constructor of AddEditAddressModal object
+     */
     this.openEvent = new Event();
     this.closeEvent = new Event();
 
@@ -38,16 +41,23 @@ class AddEditAddressModal {
     this.cancelBtnEl.addEventListener("click", this.handleCloseAddModal.bind(this));
 
     this.modalEl.addEventListener("submit", this.handleSubmit.bind(this));
+
+    // Attach event to prevent non-numeric characters from being entered into phone-input in the Firefox browser
+    this.phoneInput.addEventListener("keydown", this.handlePhoneInputForFirefox.bind(this));
   }
 
-  // Handle open ADD-modal
+  /**
+   * Handle open ADD-modal
+   */
   handleOpenAddModal() {
     this.modalEl.classList.add("modal--active");
     this.overlayEl.classList.add("overlay--active");
     this.openEvent.trigger();
   }
 
-  // Handle close ADD-modal
+  /**
+   * Handle close ADD-modal
+   */
   handleCloseAddModal() {
     this.modalEl.classList.remove("modal--active");
     this.overlayEl.classList.remove("overlay--active");
@@ -59,13 +69,21 @@ class AddEditAddressModal {
     this.closeEvent.trigger();
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  /**
+   * Handles form submission by preventing the default event and validating the form.
+   * @param {Event} event - The form submit event object.
+   */
+  handleSubmit(event) {
+    event.preventDefault();
     this.validateForm();
   }
 
   //----- VALIDATE FORM -----//
 
+  /**
+   * Form validator check if the information is valid.
+   * @returns {Boolean} is the form valid.
+   */
   validateForm() {
     let isValid = true;
 
@@ -92,14 +110,24 @@ class AddEditAddressModal {
 
     return isValid;
   }
-  // Method to show error message and apply warning styling
+
+  /**
+   * Method to show error message and apply warning styling
+   * @param {DOM Element} inputElement - The input element to which the warning styling is applied.
+   * @param {DOM Element} errorElement - The element displaying the error message.
+   * @param {String} errorMessage - The error message to be displayed.
+   */
   showErrorMessage(inputElement, errorElement, errorMessage) {
     inputElement.classList.add("input--warning");
     errorElement.textContent = errorMessage;
     errorElement.classList.add("warning-text--active");
   }
 
-  // Method to clear error message and remove warning styling
+  /**
+   * Method to clear error message and remove warning styling
+   * @param {DOM Element} inputElement - The input element from which the warning styling is removed.
+   * @param {DOM Element} errorElement - The element displaying the error message.
+   */
   clearErrorMessage(inputElement, errorElement) {
     inputElement.classList.remove("input--warning");
     errorElement.textContent = "";
@@ -115,6 +143,27 @@ class AddEditAddressModal {
       inputElement.classList.remove("input--warning");
       errorElement.textContent = "";
       errorElement.classList.remove("warning-text--active");
+    }
+  }
+
+  /**
+   * Handles phone input event for Firefox browser, preventing non-numeric characters from being entered.
+   * @param {Event} event - The input event object.
+   */
+  handlePhoneInputForFirefox(event) {
+    let keyCode = event.keyCode || event.which;
+    if (
+      (keyCode >= 48 && keyCode <= 57) || // Number keys from 0 to 9
+      (keyCode >= 96 && keyCode <= 105) || // Number keys from Right
+      keyCode === 37 || // Left arrow key
+      keyCode === 39 || // Right arrow key
+      keyCode === 8 || // Backspace key
+      keyCode === 46 // Delete key
+    ) {
+      // Allow input
+    } else {
+      // Prevent entering non-numeric characters
+      event.preventDefault();
     }
   }
 }
