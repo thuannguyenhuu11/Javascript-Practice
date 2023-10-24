@@ -38,14 +38,14 @@
 <script>
   var phoneInput = document.getElementById("phone");
 
-  // Add an 'input' event to check each time the user enters the input field
-  phoneInput.addEventListener("input", function (event) {
-    var inputValue = event.target.value;
+  phoneInput.addEventListener("keydown", function (event) {
+    // Get the key pressed code
+    var keyCode = event.keyCode || event.which;
 
-    // Removes non-numeric characters from the string
-    var numericValue = inputValue.replace(/\D/g, "");
-
-    // Assign the value with the non-numeric characters removed back into the input field
-    event.target.value = numericValue;
+    // Check if the key pressed is not a number from 0 to 9
+    if (!(keyCode >= 48 && keyCode <= 57)) {
+      // Prevents entering non-numeric characters
+      event.preventDefault();
+    }
   });
 </script>
