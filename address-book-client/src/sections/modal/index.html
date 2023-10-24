@@ -15,7 +15,7 @@
     </div>
     <div class="modal__inputs__field">
       <label for="phone" class="text text--gray text--bold text--xl">Phone number *</label>
-      <input id="phone" type="number" name="phone" pattern="[0-9]" class="text text--normal text--lg" />
+      <input id="phone" pattern="[0-9]*" type="number" name="phone" class="mz-input text text--normal text--lg" />
       <span class="warning-text text text--warning text--xs text--medium"></span>
     </div>
     <div class="modal__inputs__field">
@@ -34,3 +34,18 @@
     <button type="button" class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">Cancel</button>
   </div>
 </form>
+
+<script>
+  var phoneInput = document.getElementById("phone");
+
+  // Add an 'input' event to check each time the user enters the input field
+  phoneInput.addEventListener("input", function (event) {
+    var inputValue = event.target.value;
+
+    // Removes non-numeric characters from the string
+    var numericValue = inputValue.replace(/\D/g, "");
+
+    // Assign the value with the non-numeric characters removed back into the input field
+    event.target.value = numericValue;
+  });
+</script>

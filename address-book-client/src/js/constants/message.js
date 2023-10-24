@@ -15,7 +15,7 @@ export const MESSAGE = {
 //Regex for form validator.
 export const REGEX = {
   NAME: /^[a-zA-Z\s]+$/,
-  PHONE: /^[0-9]{10}$/,
+  PHONE: /^\d{10}$/,
   EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   AVATAR: /^[a-zA-Z\s]+$/,
 };
