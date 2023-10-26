@@ -154,12 +154,13 @@ class AddEditAddressModal {
     //Check if browser running is Firefox
     let isFirefox = navigator.userAgent.indexOf("Firefox") !== -1;
 
-    if (isFirefox) {
-      const isNumericKey = /^[0-9]$/.test(event.key); // Check if the input key is numeric
-      const isAllowedKey = [37, 39, 8, 46].includes(event.keyCode); // Check if the input key is numeric
-      if (!isNumericKey && !isAllowedKey) {
-        event.preventDefault();
-      }
+    if (!isFirefox) return;
+
+    const isNumericKey = /^[0-9]$/.test(event.key); // Check if the input key is numeric
+    const isAllowedKey = [37, 39, 8, 46].includes(event.keyCode); // Check if the input key is numeric
+
+    if (!isNumericKey && !isAllowedKey) {
+      event.preventDefault();
     }
   }
 }
