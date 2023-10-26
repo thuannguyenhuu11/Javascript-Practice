@@ -108,19 +108,6 @@ class AddEditAddressModal {
       }
     }
 
-    // Check for Firefox  and handle phone input accordingly
-    let isFirefox = navigator.userAgent.indexOf("Firefox") !== -1;
-    if (isFirefox) {
-      const phoneInputValue = this.modalEl.phone.value;
-      const isNumericPhone = /^[0-9]+$/.test(phoneInputValue);
-      if (!isNumericPhone) {
-        this.showErrorMessage(this.phoneInput, this.phoneError, MESSAGE.INVALID_PHONE);
-        isValid = false;
-      } else {
-        this.clearErrorMessage(this.phoneInput, this.phoneError);
-      }
-    }
-
     return isValid;
   }
 
