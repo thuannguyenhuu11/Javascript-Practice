@@ -108,6 +108,19 @@ class AddEditAddressModal {
       }
     }
 
+    // Check for Firefox  and handle phone input accordingly
+    let isFirefox = navigator.userAgent.indexOf("Firefox") !== -1;
+    if (isFirefox) {
+      const phoneInputValue = this.modalEl.phone.value;
+      const isNumericPhone = /^[0-9]+$/.test(phoneInputValue);
+      if (!isNumericPhone) {
+        this.showErrorMessage(this.phoneInput, this.phoneError, MESSAGE.INVALID_PHONE);
+        isValid = false;
+      } else {
+        this.clearErrorMessage(this.phoneInput, this.phoneError);
+      }
+    }
+
     return isValid;
   }
 
@@ -147,23 +160,19 @@ class AddEditAddressModal {
   }
 
   /**
-   * Handles phone input event for Firefox browser, preventing non-numeric characters from being entered.
+   * Handles phone input for Firefox browser to allow only number
    * @param {Event} event - The input event object.
    */
   handlePhoneInputForFirefox(event) {
-    let keyCode = event.keyCode || event.which;
-    if (
-      (keyCode >= 48 && keyCode <= 57) || // Number keys from 0 to 9
-      (keyCode >= 96 && keyCode <= 105) || // Number keys from Right
-      keyCode === 37 || // Left arrow key
-      keyCode === 39 || // Right arrow key
-      keyCode === 8 || // Backspace key
-      keyCode === 46 // Delete key
-    ) {
-      // Allow input
-    } else {
-      // Prevent entering non-numeric characters
-      event.preventDefault();
+    //Check if browser running is Firefox
+    let isFirefox = navigator.userAgent.indexOf("Firefox") !== -1;
+
+    if (isFirefox) {
+      const isNumericKey = /^[0-9]$/.test(event.key); // Check if the input key is numeric
+      const isAllowedKey = [37, 39, 8, 46].includes(event.keyCode); // Check if the input key is numeric
+      if (!isNumericKey && !isAllowedKey) {
+        event.preventDefault();
+      }
     }
   }
 }
