@@ -92,3 +92,15 @@ select {
   max-width: 264px;
   height: 62px;
 }
+
+.mz-input {
+  -moz-appearance: textfield;
+}
+.mz-input::-webkit-inner-spin-button {
+  display: none;
+}
+.mz-input::-webkit-outer-spin-button,
+.mz-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

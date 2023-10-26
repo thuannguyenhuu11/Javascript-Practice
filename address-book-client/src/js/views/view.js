@@ -1,11 +1,11 @@
-import ModalView from "./modalView";
+import AddEditAddressModal from "./AddEditAddressModal";
 
 class View {
   /**
    * Constructor function for View object.
    */
   constructor() {
-    this.modal = new ModalView();
+    this.modal = new AddEditAddressModal();
   }
 }
 
