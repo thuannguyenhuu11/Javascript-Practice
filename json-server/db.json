@@ -1,0 +1,12 @@
+{
+  "contacts": [
+    {
+      "id": "1",
+      "name": "David John",
+      "relation": "Best Friend",
+      "phone": "0706312495",
+      "email": "johndavid@gmail.com",
+      "avatar": "https://res.cloudinary.com/dluciewzm/image/upload/v1698717366/Javascript-practice/ywhkxup6wz5a2u88cvtm.png"
+    }
+  ]
+}

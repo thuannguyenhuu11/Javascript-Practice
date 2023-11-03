@@ -1,5 +1,6 @@
 import Event from "../events/event";
 import { MESSAGE, REGEX } from "../constants/message";
+import Template from "../templates/template";
 
 class AddEditAddressModal {
   constructor() {
@@ -76,6 +77,19 @@ class AddEditAddressModal {
   handleSubmit(event) {
     event.preventDefault();
     this.validateForm();
+
+    if (isValid) {
+      const contactData = {
+        name: this.modalEl.name.value,
+        relation: this.modalEl.relation.value,
+        phone: this.modalEl.phone.value,
+        email: this.modalEl.email.value,
+        avatar: this.modalEl.avatar.value,
+      };
+
+      // Handle method add-contact from controller
+      addressController.addContact(contactData);
+    }
   }
 
   //----- VALIDATE FORM -----//
@@ -106,6 +120,19 @@ class AddEditAddressModal {
       } else {
         this.clearErrorMessage(inputEl, field.errorElement);
       }
+    }
+
+    if (isValid) {
+      const contactData = {
+        name: this.modalEl.name.value,
+        relation: this.modalEl.relation.value,
+        phone: this.modalEl.phone.value,
+        email: this.modalEl.email.value,
+        avatar: this.modalEl.avatar.value,
+      };
+
+      // Handle method add-contact from controller
+      addressController.addContact(contactData);
     }
 
     return isValid;
@@ -162,6 +189,16 @@ class AddEditAddressModal {
     if (!isNumericKey && !isAllowedKey) {
       event.preventDefault();
     }
+  }
+
+  /**
+   * Method to render the contact and add it to the list.
+   * @param {Object} contactData - Data of the contact to be added.
+   */
+  renderContact(contactData) {
+    const contactList = document.querySelector(".contact-list");
+    const contactItem = Template.renderContact(contactData);
+    contactList.insertAdjacentHTML("beforeend", contactItem);
   }
 }
 
