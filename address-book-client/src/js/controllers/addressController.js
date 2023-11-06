@@ -1,7 +1,5 @@
 import Model from "../models/model";
 import View from "../views/view";
-import axios from "axios";
-import API_BASE_URL from "../constants/url";
 
 class AddressController {
   constructor() {
@@ -9,23 +7,14 @@ class AddressController {
     this.view = new View();
   }
 
-  addContact(contactData) {
-    axios
-      .post(`${API_BASE_URL}/contacts`, contactData)
-      .then(response => {
-        // Handle response from API
-        console.log(response.data);
-
-        // Render the new contact in the list
-        this.view.modal.renderContact(response.data);
-
-        // Close the modal after adding the contact
-        this.view.modal.handleCloseAddModal();
-      })
-      .catch(error => {
-        // Handle error (if any)
-        console.error(error);
-      });
+  async addContact(contactData) {
+    try {
+      const newContact = await this.model.contact.addContact(contactData);
+      this.view.modal.renderContact(newContact);
+      this.view.modal.handleCloseAddModal();
+    } catch (error) {
+      console.error("Error in adding contact:", error);
+    }
   }
 }
 
