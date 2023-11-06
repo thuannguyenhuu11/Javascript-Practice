@@ -1,8 +1,8 @@
-import contactService from "../services/ContactService";
+import ContactService from "../services/contactService";
 ​
 class ContactModel {
   async addContact(contactData) {
-    return await contactService.addContact(contactData);
+    return await ContactService.addContact(contactData);
   }
 }
 ​
