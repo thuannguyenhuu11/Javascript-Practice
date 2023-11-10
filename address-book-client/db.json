@@ -1,0 +1,36 @@
+{
+  "contacts": [
+    {
+      "name": "Nguyen Huu Thuan",
+      "relation": "friend",
+      "phone": "0905105401",
+      "email": "thuannguyenhuu11@gmail.com",
+      "avatar": "thuan",
+      "id": 1
+    },
+    {
+      "name": "Nguyen Huu Thuan",
+      "relation": "friend",
+      "phone": "0905105401",
+      "email": "thuannguyenhuu11@gmail.com",
+      "avatar": "thuan",
+      "id": 2
+    },
+    {
+      "name": "Nguyen Huu Thuan",
+      "relation": "friend",
+      "phone": "0905105401",
+      "email": "thuannguyenhuu11@gmail.com",
+      "avatar": "thuan",
+      "id": 3
+    },
+    {
+      "name": "Nguyen Huu Thuan",
+      "relation": "friend",
+      "phone": "0905105401",
+      "email": "thuannguyenhuu11@gmail.com",
+      "avatar": "thuan",
+      "id": 4
+    }
+  ]
+}

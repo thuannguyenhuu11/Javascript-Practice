@@ -53,7 +53,6 @@ class AddEditAddressModal {
   handleOpenAddModal() {
     this.modalEl.classList.add("modal--active");
     this.overlayEl.classList.add("overlay--active");
-    this.openEvent.trigger();
   }
 
   /**
@@ -66,8 +65,6 @@ class AddEditAddressModal {
     // Clear any previous error messages and styles
     this.resetModal();
     this.modalEl.reset();
-
-    this.closeEvent.trigger();
   }
 
   /**
@@ -76,20 +73,7 @@ class AddEditAddressModal {
    */
   handleSubmit(event) {
     event.preventDefault();
-    this.validateForm();
-
-    if (isValid) {
-      const contactData = {
-        name: this.modalEl.name.value,
-        relation: this.modalEl.relation.value,
-        phone: this.modalEl.phone.value,
-        email: this.modalEl.email.value,
-        avatar: this.modalEl.avatar.value,
-      };
-
-      // Handle method add-contact from controller
-      addressController.addContact(contactData);
-    }
+    let isValid = this.validateForm();
   }
 
   //----- VALIDATE FORM -----//

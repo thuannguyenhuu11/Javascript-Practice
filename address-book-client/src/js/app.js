@@ -1,5 +1,17 @@
-import AddressController from "./controllers/addressController";
+import Model from "../js/models/model";
+import View from "../js/views/view";
+import AddressController from "../js/controllers/addressController";
 
-const app = new AddressController();
+export class App {
+  /**
+   * Constructor off App object
+   */
+  constructor() {}
 
-app.run();
+  /**
+   * Function for starting the App
+   */
+  async start() {
+    const controller = new AddressController(new Model(), new View());
+  }
+}

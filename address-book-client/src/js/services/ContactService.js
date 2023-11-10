@@ -13,8 +13,8 @@ class ContactService {
       const response = await axios.post(`${API_BASE_URL}/contacts`, contactData);
       return response.data;
     } catch (error) {
-      console.error("Error adding contact:", error);
-      throw error;
+      // Here we are throwing the error to be caught by the calling function
+      throw new Error(error.response ? error.response.data : error.message);
     }
   }
 }

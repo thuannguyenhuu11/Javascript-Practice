@@ -4,8 +4,8 @@ class View {
   /**
    * Constructor function for View object.
    */
-  constructor() {
-    this.modal = new AddEditAddressModal();
+  constructor(controller) {
+    this.modal = new AddEditAddressModal(controller);
   }
 }
 

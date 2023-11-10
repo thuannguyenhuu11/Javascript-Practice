@@ -11,9 +11,9 @@ class Template {
    */
   static renderContact = contact => `
    <li class="contact-item row" data-id="${contact.id}">
-       <div class="contact-item__avatar col-2">
+       <figure class="contact-item__avatar col-2">
            <img src="${contact.avatar}" alt="avatar" />
-       </div>
+       </figure>
        <div class="contact-item__info col-3">
            <p class="contact-item__info__name text text--black text--semibold text--lg">${contact.name}</p>
            <p class="text text--gray text--xs text--medium">${contact.relation.name}</p>
