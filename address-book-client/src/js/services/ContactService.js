@@ -12,9 +12,8 @@ class ContactService {
     try {
       const response = await axios.post(`${API_BASE_URL}/contacts`, contactData);
       return response.data;
-    } catch (error) {
+    } catch {
       // Here we are throwing the error to be caught by the calling function
-      throw new Error(error.response ? error.response.data : error.message);
     }
   }
 
@@ -22,10 +21,7 @@ class ContactService {
     try {
       const response = await axios.get(`${API_BASE_URL}/contacts`);
       return response.data;
-    } catch (error) {
-      console.error("Error in getting contacts:", error);
-      throw error;
-    }
+    } catch {}
   }
 }
 

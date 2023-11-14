@@ -23,6 +23,7 @@ export const ERROR_MESSAGE = {
   OPEN_ADD_MODAL: "Couldn't open add modal",
   OPEN_EDIT_MODAL: "Couldn't open edit modal",
   DELETE_CONTACT: "Couldn't delete contact",
+  GET_CONTACT: "Couln't get contact",
   ADD_CONTACT: "Couldn't add contact",
   EDIT_CONTACT: "Couldn't edit contact",
 };

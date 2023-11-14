@@ -20,7 +20,7 @@ class AddressController {
       const newContact = await this.model.contact.addContact(contactData);
       this.view.contact.renderContact(newContact);
       this.view.modal.handleCloseAddModal();
-    } catch (error) {
+    } catch {
       this.displaySnackbar("warning", ERROR_MESSAGE.ADD_CONTACT);
     }
   }

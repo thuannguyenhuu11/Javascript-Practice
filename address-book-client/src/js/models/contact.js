@@ -9,9 +9,8 @@ class ContactModel {
       const newContact = await ContactService.addContact(contactData);
       this.contacts.push(newContact);
       return newContact;
-    } catch (error) {
-      console.error("Error in adding contact:", error);
-      throw error;
+    } catch {
+      this.displaySnackbar("warning", ERROR_MESSAGE.ADD_CONTACT);
     }
   }
 
@@ -19,9 +18,8 @@ class ContactModel {
     try {
       this.contacts = await ContactService.getContacts();
       return this.contacts;
-    } catch (error) {
-      console.error("Error in getting contacts:", error);
-      throw error;
+    } catch {
+      this.displaySnackbar("warning", ERROR_MESSAGE.GET_CONTACT);
     }
   }
 }
