@@ -114,9 +114,6 @@ class AddEditAddressModal {
         email: this.modalEl.email.value,
         avatar: this.modalEl.avatar.value,
       };
-
-      // Handle method add-contact from controller
-      addressController.addContact(contactData);
     }
 
     return isValid;
@@ -173,16 +170,6 @@ class AddEditAddressModal {
     if (!isNumericKey && !isAllowedKey) {
       event.preventDefault();
     }
-  }
-
-  /**
-   * Method to render the contact and add it to the list.
-   * @param {Object} contactData - Data of the contact to be added.
-   */
-  renderContact(contactData) {
-    const contactList = document.querySelector(".contact-list");
-    const contactItem = Template.renderContact(contactData);
-    contactList.insertAdjacentHTML("beforeend", contactItem);
   }
 }
 

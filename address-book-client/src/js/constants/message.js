@@ -12,6 +12,21 @@ export const MESSAGE = {
   INVALID_RELATION: "The relation is invalid",
 };
 
+//Message for alert the error while fetching or rendering.
+
+export const ERROR_MESSAGE = {
+  INIT_CONTACT_LIST: "Couldn't initialize contact list",
+  INIT_RELATION_LIST: "Couldn't initialize relation list",
+  RENDER_CONTACT_LIST: "Couldn't display contact list",
+  RENDER_CONTACT_INFO: "Couldn't display contact info",
+  OPEN_CONFIRM_MODAL: "Couldn't open confirm modal",
+  OPEN_ADD_MODAL: "Couldn't open add modal",
+  OPEN_EDIT_MODAL: "Couldn't open edit modal",
+  DELETE_CONTACT: "Couldn't delete contact",
+  ADD_CONTACT: "Couldn't add contact",
+  EDIT_CONTACT: "Couldn't edit contact",
+};
+
 //Regex for form validator.
 export const REGEX = {
   NAME: /^[a-zA-Z\s]+$/,

@@ -9,7 +9,8 @@ class Template {
    * @param {Object} contact
    * @returns {HTMLElement} Template for rendering contact list row.
    */
-  static renderContact = contact => `
+  static renderContact = contact =>
+    `
    <li class="contact-item row" data-id="${contact.id}">
        <figure class="contact-item__avatar col-2">
            <img src="${contact.avatar}" alt="avatar" />

@@ -17,6 +17,16 @@ class ContactService {
       throw new Error(error.response ? error.response.data : error.message);
     }
   }
+
+  async getContacts() {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/contacts`);
+      return response.data;
+    } catch (error) {
+      console.error("Error in getting contacts:", error);
+      throw error;
+    }
+  }
 }
 
 export default new ContactService();
