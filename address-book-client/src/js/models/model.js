@@ -1,8 +1,10 @@
-import ContactModel from "./contact";
+import Contacts from "./contact";
+import Relations from "./relations";
 
 class Model {
   constructor() {
-    this.contact = new ContactModel();
+    this.contact = new Contacts();
+    this.relation = new Relations();
   }
 }
 

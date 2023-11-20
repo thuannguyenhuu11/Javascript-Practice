@@ -1,29 +1,58 @@
-import Model from "../models/model";
-import View from "../views/view";
 import { ERROR_MESSAGE } from "../constants/message";
 
 class AddressController {
   constructor() {
     this.model = new Model();
     this.view = new View();
-
-    // Event bindings
-    this.view.modal.addBtnEl.addEventListener("click", () => this.view.modal.handleOpenAddModal());
-    this.view.modal.cancelBtnEl.addEventListener("click", () => this.view.modal.handleCloseAddModal());
-    this.view.modal.modalEl.addEventListener("submit", this.addContact.bind(this));
   }
 
-  async addContact(event) {
-    event.preventDefault();
-    const contactData = new FormData(event.target);
+  /**
+   * Initializing the controller
+   */
+  init = async () => {
+    await this.initRelations();
+    await this.initContacts();
+    this.initModal();
+  };
+
+  //----- CONTACT CONTROLLER -----//
+
+  /**
+   * Initializing the contact list and contact information.
+   */
+  initContacts = async () => {
     try {
-      const newContact = await this.model.contact.addContact(contactData);
-      this.view.contact.renderContact(newContact);
-      this.view.modal.handleCloseAddModal();
+      await this.model.contact.init();
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.ADD_CONTACT);
+      this.displaySnackbar("warning", ERROR_MESSAGE.INIT_CONTACT_LIST);
     }
-  }
+    this.loadListContacts();
+    this.showInfo();
+    this.view.contact.addEventAddContact(this.addContact);
+  };
+
+  /**
+   * Load and display the contact list.
+   */
+  loadListContacts = () => {
+    const contacts = this.model.contact.filterList(this.view.contact.filterParams);
+    try {
+      this.view.contact.renderContactList(contacts);
+    } catch {
+      this.displaySnackbar("warning", ERROR_MESSAGE.RENDER_CONTACT_LIST);
+    }
+  };
+
+  /**
+   * Show a modal when click add contact.
+   */
+  addContact = () => {
+    try {
+      this.view.modal.openModal();
+    } catch {
+      this.displaySnackbar("warning", ERROR_MESSAGE.OPEN_ADD_MODAL);
+    }
+  };
 
   //----- SNACKBAR CONTROLLER -----//
   /**

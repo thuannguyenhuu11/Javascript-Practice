@@ -1,5 +1,6 @@
 import ContactView from "./contactView";
 import AddEditAddressModal from "./AddEditAddressModal";
+import SnackbarView from "./snackbarView";
 
 class View {
   /**
@@ -8,6 +9,7 @@ class View {
   constructor() {
     this.contact = new ContactView();
     this.modal = new AddEditAddressModal();
+    this.snackBar = new SnackbarView();
   }
 }
 

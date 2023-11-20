@@ -6,14 +6,13 @@ export class App {
   /**
    * Constructor off App object
    */
-  constructor() {
-    this.controller = new AddressController(new Model(), new View());
-  }
+  constructor() {}
 
   /**
    * Function for starting the App
    */
   async start() {
-    await this.controller.init();
+    const controller = new AddressController(new Model(), new View());
+    await controller.init();
   }
 }
