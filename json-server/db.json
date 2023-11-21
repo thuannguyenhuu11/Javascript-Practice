@@ -1,12 +1,42 @@
 {
   "contacts": [
     {
+      "id": "0e4813ba-6617-4b6c-97b0-7af30340e2e6",
+      "name": "Jason Toad",
+      "relationId": "1",
+      "phone": "0943111147",
+      "email": "jasontoad@gmail.com",
+      "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
+    },
+    {
+      "id": "4b9b59bb-9f80-47e1-959d-6b454bff9726",
+      "name": "Tim Drake",
+      "relationId": "2",
+      "phone": "0905678134",
+      "email": "timdrake@gmail.com",
+      "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
+    },
+    {
+      "id": "0c6831b2-517b-401b-a21a-461a1022ce48",
+      "name": "Damian Wayne",
+      "relationId": "3",
+      "phone": "0905956144",
+      "email": "damianwayne.com",
+      "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
+    }
+  ],
+  "relations": [
+    {
       "id": "1",
-      "name": "David John",
-      "relation": "Best Friend",
-      "phone": "0706312495",
-      "email": "johndavid@gmail.com",
-      "avatar": "https://res.cloudinary.com/dluciewzm/image/upload/v1698717366/Javascript-practice/ywhkxup6wz5a2u88cvtm.png"
+      "name": "family"
+    },
+    {
+      "id": "2",
+      "name": "friend"
+    },
+    {
+      "id": "3",
+      "name": "colleague"
     }
   ]
 }

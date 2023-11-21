@@ -1,9 +1,14 @@
-import { ERROR_MESSAGE } from "../constants/message";
-
+import { v4 as uuidv4 } from "uuid";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../constants/message";
 class AddressController {
-  constructor() {
-    this.model = new Model();
-    this.view = new View();
+  /**
+   * Constructor of Controller object
+   * @param {Object} model
+   * @param {Object} view
+   */
+  constructor(model, view) {
+    this.model = model;
+    this.view = view;
   }
 
   /**
@@ -27,7 +32,6 @@ class AddressController {
       this.displaySnackbar("warning", ERROR_MESSAGE.INIT_CONTACT_LIST);
     }
     this.loadListContacts();
-    this.showInfo();
     this.view.contact.addEventAddContact(this.addContact);
   };
 
@@ -54,7 +58,59 @@ class AddressController {
     }
   };
 
+  /**
+   * Add or edit a contact and display the new contact list.
+   * @param {Object} contact
+   */
+  saveContact = async contact => {
+    if (!contact.id) {
+      contact = {
+        id: uuidv4(),
+        name: contact.name,
+        relationId: contact.relationId,
+        phone: contact.phone,
+        email: contact.email,
+        avatar: contact.avatar,
+      };
+      try {
+        await this.model.contact.addContact(contact, this.model.relation.getRelationById);
+        this.displaySnackbar("success", SUCCESS_MESSAGE.ADD_CONTACT);
+      } catch {
+        this.displaySnackbar("warning", ERROR_MESSAGE.ADD_CONTACT);
+      }
+    }
+    this.loadListContacts();
+  };
+
+  //----- RELATION CONTROLLER -----//
+
+  /**
+   * Initializing the relation lists.
+   */
+  initRelations = async () => {
+    try {
+      await this.model.relation.init();
+    } catch {
+      this.displaySnackbar("warning", ERROR_MESSAGE.INIT_RELATION_LIST);
+    }
+    const relations = this.model.relation.getRelations();
+    this.view.relation.renderRelationList(relations);
+    this.view.relation.renderRelationDropdownList(relations);
+  };
+
+  //----- MODAL CONTROLLER -----//
+
+  /**
+   * Initializing the modals.
+   */
+  initModal = async () => {
+    this.view.modal.addEventSubmission(this.saveContact);
+    this.view.modal.addEventCancelModal();
+    this.view.modal.addEventClickOutside();
+  };
+
   //----- SNACKBAR CONTROLLER -----//
+
   /**
    * Display the snackbar on top of the window.
    * @param {String} type

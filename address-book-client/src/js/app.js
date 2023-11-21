@@ -1,6 +1,6 @@
-import Model from "../js/models/model";
-import View from "../js/views/view";
-import AddressController from "../js/controllers/addressController";
+import Model from "./models/model";
+import View from "./views/view";
+import AddressController from "./controllers/addressController";
 
 export class App {
   /**

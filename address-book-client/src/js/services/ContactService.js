@@ -1,7 +1,11 @@
-import ApiRequest from "../helpers/APIrequest";
-import API_BASE_URL from "../constants/url";
+import { API_BASE_URL } from "../constants/urls";
+import { QUERY } from "../constants/message";
+import ApiRequest from "../helpers/apiRequest";
 
 class ContactService {
+  /**
+   * Constructor of Contact Service object.
+   */
   constructor() {
     this.apiRequest = new ApiRequest(API_BASE_URL, "/contacts");
   }
@@ -11,16 +15,8 @@ class ContactService {
    * @returns {Array} Contact list
    */
   getContactList = async () => {
-    return await this.apiRequest.get(null, "?_expand=relation");
-  };
-
-  /**
-   * Get contact by Id from database.
-   * @param {String} id
-   * @returns {Object} Contact object
-   */
-  getContactById = async id => {
-    return await this.apiRequest.get(id, "?_expand=relation");
+    const data = await this.apiRequest.get(null, QUERY.EXPAND_RELATION);
+    return data;
   };
 
   /**

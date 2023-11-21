@@ -1,15 +1,12 @@
-import axios from "axios";
-
 class ApiRequest {
+  /**
+   * Constructor function for ApiRequest object.
+   * @param {String} baseUrl
+   * @param {String} path
+   */
   constructor(baseUrl, path) {
     this.baseUrl = baseUrl;
     this.path = path;
-    this.axiosInstance = axios.create({
-      baseURL: this.baseUrl,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
   }
 
   /**
@@ -18,9 +15,8 @@ class ApiRequest {
    * @param {String} query
    * @return {Object|Array} response from server.
    */
-  get = async (id, query) => {
-    const response = await this.axiosInstance.get(`${this.path}${id ? `/${id}/` : ""}${query ? query : ""}`);
-    return response.data;
+  get = (id, query) => {
+    return this.sendRequest(`${this.path}${id ? `/${id}/` : ""}${query ? query : ""}`, "GET");
   };
 
   /**
@@ -28,9 +24,8 @@ class ApiRequest {
    * @param {Object} data
    * @returns {Object} response from server.
    */
-  post = async data => {
-    const response = await this.axiosInstance.post(this.path, data);
-    return response.data;
+  post = data => {
+    return this.sendRequest(`${this.path}`, "POST", data);
   };
 
   /**
@@ -39,9 +34,8 @@ class ApiRequest {
    * @param {Object} data
    * @returns {Object} response from server.
    */
-  put = async (id, data) => {
-    const response = await this.axiosInstance.put(`${this.path}/${id}`, data);
-    return response.data;
+  put = (id, data) => {
+    return this.sendRequest(`${this.path}/${id}`, "PUT", data);
   };
 
   /**
@@ -50,9 +44,8 @@ class ApiRequest {
    * @param {Object} data
    * @returns {Object} response from server.
    */
-  patch = async (id, data) => {
-    const response = await this.axiosInstance.patch(`${this.path}/${id}`, data);
-    return response.data;
+  patch = (id, data, query) => {
+    return this.sendRequest(`${this.path}/${id}`, "PATCH", data);
   };
 
   /**
@@ -60,9 +53,30 @@ class ApiRequest {
    * @param {String} id
    * @returns @returns {Object} response from server.
    */
-  delete = async id => {
-    const response = await this.axiosInstance.delete(`${this.path}/${id}`);
-    return response.data;
+  delete = id => {
+    return this.sendRequest(`${this.path}/${id}`, "DELETE");
+  };
+
+  /**
+   * Send the HTTP request to the API_GATEWAY_URL endpoint.
+   * @param {String} method
+   * @param {Object} body
+   * @return {Object|Array} response from server.
+   */
+  sendRequest = async (path, method, body) => {
+    const url = `${this.baseUrl}${path}`;
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error("Error while sending request");
+    }
   };
 }
 
