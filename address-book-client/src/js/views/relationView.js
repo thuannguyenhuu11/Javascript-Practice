@@ -6,7 +6,6 @@ class RelationView {
    */
   constructor() {
     this.relationListEl = document.querySelector('.relation-list');
-    this.relationDropDownEl = document.querySelector('.relation-dropdown');
   }
 
   //----- RENDERING -----//

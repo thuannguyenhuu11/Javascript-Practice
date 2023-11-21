@@ -1,5 +1,5 @@
-import RelationService from "../services/relationService";
-import Relation from "./relations";
+import RelationService from '../services/relationService';
+import Relation from './relations';
 
 class Relations {
   /**
@@ -23,8 +23,8 @@ class Relations {
    * @param {Array} data
    * @returns {Array} array of Relation objects.
    */
-  parseData = data => {
-    return data.map(item => new Relation(item));
+  parseData = (data) => {
+    return data.map((item) => new Relation(item));
   };
 
   /**
@@ -39,8 +39,8 @@ class Relations {
    * @param {String} id
    * @returns {Object} a relation object.
    */
-  getRelationById = id => {
-    return this.relations.find(relation => relation.id === id);
+  getRelationById = (id) => {
+    return this.relations.find((relation) => relation.id === id);
   };
 }
 
