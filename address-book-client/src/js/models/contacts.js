@@ -1,5 +1,5 @@
-import ContactService from "../services/contactService";
-import Contact from "./contact";
+import ContactService from '../services/contactService';
+import Contact from './contact';
 
 class Contacts {
   /**
@@ -7,9 +7,7 @@ class Contacts {
    */
   constructor() {
     this.service = new ContactService();
-
     this.contactList; // List of contacts.
-    this.contactInfo; // Contact information for displaying.
   }
 
   /**
@@ -18,7 +16,6 @@ class Contacts {
   init = async () => {
     const data = await this.service.getContactList();
     this.contactList = this.parseData(data);
-    this.contactInfo = this.contactList[0];
   };
 
   /**
@@ -26,8 +23,8 @@ class Contacts {
    * @param {Array} data
    * @returns {Array} array of Contact object.
    */
-  parseData = data => {
-    return data.map(item => new Contact(item));
+  parseData = (data) => {
+    return data.map((item) => new Contact(item));
   };
 
   /**
@@ -35,26 +32,6 @@ class Contacts {
    */
   getContactList = () => {
     return this.contactList;
-  };
-
-  getContactInfo = () => {
-    return this.contactInfo;
-  };
-
-  setContactInfo = id => {
-    const data = this.contactList.find(contact => contact.id === id);
-    this.contactInfo = new Contact(data);
-  };
-
-  /**
-   * Get contact infomation by ID.
-   * @param {String} id
-   * @returns {Object} contact information object.
-   */
-  getContactById = async id => {
-    const data = await this.service.getContactById(id);
-    this.contactInfo = new Contact(data);
-    return this.contactInfo;
   };
 
   /**
@@ -69,6 +46,24 @@ class Contacts {
     this.contactList.push(contact);
     console.log(this.contactList);
     this.contactInfo = contact;
+  };
+
+  /**
+   * Filter and search contact in contact displaying list.
+   * @param {Object} params
+   * @returns {Array} result list after filter
+   */
+  filterList = (params) => {
+    const { filter } = params;
+    const result = this.contactList.filter((contact) => {
+      let isMatchFilter = true;
+      // Match with filter
+      if (filter.relation !== '0') {
+        isMatchFilter = contact.relation.id === filter.relation;
+      }
+      return isMatchFilter;
+    });
+    return result;
   };
 }
 

@@ -1,19 +1,19 @@
-import Template from "../templates/template";
+import Template from '../templates/template';
 class ContactView {
   /**
    * Constructor of ContactView object
    */
   constructor() {
-    this.contactListEl = document.querySelector(".contacts__list");
-    this.addBtnEl = document.querySelector(".features__add");
+    this.contactListEl = document.querySelector('.contacts__list');
+    this.addBtnEl = document.querySelector('.features__add');
   }
 
-  contactEl = ".contact-item";
+  contactEl = '.contact-item';
 
   filterParams = {
-    searchKey: "",
+    searchKey: '',
     filter: {
-      relation: "0",
+      relation: '0',
     },
   };
 
@@ -23,9 +23,9 @@ class ContactView {
    * Display the contact list.
    * @param {Array} contacts
    */
-  renderContactList = contacts => {
-    this.contactListEl.innerHTML = "";
-    contacts.forEach(contact => {
+  renderContactList = (contacts) => {
+    this.contactListEl.innerHTML = '';
+    contacts.forEach((contact) => {
       this.renderContact(contact);
     });
   };
@@ -34,7 +34,7 @@ class ContactView {
    * Render a contact in contact list.
    * @param {Object} contact
    */
-  renderContact = contact => {
+  renderContact = (contact) => {
     const contactTemplate = Template.renderContact(contact);
     this.contactListEl.innerHTML += contactTemplate;
   };
@@ -45,8 +45,8 @@ class ContactView {
    * Add event listener adding a contact action to the add contact button.
    * @param {Function} addContact
    */
-  addEventAddContact = addContact => {
-    this.addBtnEl.addEventListener("click", () => {
+  addEventAddContact = (addContact) => {
+    this.addBtnEl.addEventListener('click', () => {
       addContact();
     });
   };

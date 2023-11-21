@@ -1,12 +1,12 @@
-import Template from "../templates/template";
+import Template from '../templates/template';
 
 class RelationView {
   /**
    * Constructor of RelationView object
    */
   constructor() {
-    this.relationListEl = document.querySelector(".relation-list");
-    this.relationDropDownEl = document.querySelector(".relation-dropdown");
+    this.relationListEl = document.querySelector('.relation-list');
+    this.relationDropDownEl = document.querySelector('.relation-dropdown');
   }
 
   //----- RENDERING -----//
@@ -15,19 +15,9 @@ class RelationView {
    * Render the relation list in adding or editing modal.
    * @param {Array} relations
    */
-  renderRelationList = relations => {
-    relations.forEach(relation => {
+  renderRelationList = (relations) => {
+    relations.forEach((relation) => {
       this.renderRelation(relation);
-    });
-  };
-
-  /**
-   * Render the relation list in filter dropdown.
-   * @param {Array} relations
-   */
-  renderRelationDropdownList = relations => {
-    relations.forEach(relation => {
-      this.renderRelationDropdown(relation);
     });
   };
 
@@ -35,18 +25,9 @@ class RelationView {
    * Render a relation in relation list in adding or editing modal.
    * @param {Object} relation
    */
-  renderRelation = relation => {
+  renderRelation = (relation) => {
     const relationTemplate = Template.renderRelation(relation);
     this.relationListEl.innerHTML += relationTemplate;
-  };
-
-  /**
-   * Render a relation in relation list in filter dropdown.
-   * @param {Object} relation
-   */
-  renderRelationDropdown = relation => {
-    const relationDropDownTemplate = Template.renderRelationDropDown(relation);
-    this.relationDropDownEl.innerHTML += relationDropDownTemplate;
   };
 }
 

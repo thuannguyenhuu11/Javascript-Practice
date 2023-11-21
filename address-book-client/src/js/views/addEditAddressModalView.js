@@ -1,6 +1,4 @@
-import Event from "../events/event";
-import { MESSAGE, REGEX } from "../constants/message";
-import Template from "../templates/template";
+import formValidator from "../helpers/formValidate";
 
 class AddEditAddressModalView {
   /**
@@ -9,7 +7,7 @@ class AddEditAddressModalView {
   constructor() {
     this.modalEl = document.querySelector(".modal");
     this.overlayEl = document.querySelector(".overlay");
-    this.cancelModalBtnEl = this.modalEl.querySelectorAll(".modal__top__btn,.modal__buttons__cancel");
+    this.cancelModalBtnEl = this.modalEl.querySelectorAll(".modal__buttons__cancel");
   }
 
   //----- RENDERING -----//
@@ -33,7 +31,7 @@ class AddEditAddressModalView {
   };
 
   /**
-   * Close adding or editing contact modal
+   * Close adding contact modal
    */
   closeModal = () => {
     this.modalEl.classList.remove("modal--active");

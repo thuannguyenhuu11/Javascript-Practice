@@ -9,7 +9,7 @@ class Template {
    * @param {Object} contact
    * @returns {HTMLElement} Template for rendering contact list row.
    */
-  static renderContact = contact => `
+  static renderContact = (contact) => `
           <li class="contact-item row" data-id="${contact.id}">
               <div class="contact-item__avatar col-2">
                   <img src="${contact.avatar}" alt="avatar" />
@@ -28,7 +28,7 @@ class Template {
    * @param {Object} relation
    * @returns {HTMLElement} HTML element for displaying relation in relation list in adding, editing form.
    */
-  static renderRelation = relation => `
+  static renderRelation = (relation) => `
           <option value="${relation.id}">${relation.name}</option>
       `;
 
@@ -37,7 +37,7 @@ class Template {
    * @param {Object} relation
    * @returns {HTMLElement} HTML element for displaying relation in filter options.
    */
-  static renderRelationDropDown = relation => `  
+  static renderRelationDropDown = (relation) => `  
           <input type="radio" id="${relation.id}" name="filter_option" value="${relation.id}">     
           <label class="relation-dropdown__li text text--gray text--normal text--lg" for="${relation.id}">${relation.name}</label>
       `;
