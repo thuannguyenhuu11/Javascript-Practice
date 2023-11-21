@@ -1,7 +1,9 @@
 {
+  "name": "database",
   "scripts": {
     "start": "node server.js"
   },
+  "license": "ISC",
   "devDependencies": {
     "json-server": "^0.17.4"
   }
