@@ -1,4 +1,6 @@
-import formValidator from "../helpers/formValidate";
+import Event from "../events/event";
+import { MESSAGE, REGEX } from "../constants/message";
+import Template from "../templates/template";
 
 class AddEditAddressModalView {
   /**

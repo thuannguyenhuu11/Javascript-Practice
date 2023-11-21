@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { v4 as uuidv4 } from "uuid";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../constants/message";
 class AddressController {
@@ -9,28 +10,34 @@ class AddressController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
+=======
+import Model from "../models/model";
+import View from "../views/view";
+import { ERROR_MESSAGE } from "../constants/message";
+
+class AddressController {
+  constructor() {
+    this.model = new Model();
+    this.view = new View();
+
+    // Event bindings
+    this.view.modal.addBtnEl.addEventListener("click", () => this.view.modal.handleOpenAddModal());
+    this.view.modal.cancelBtnEl.addEventListener("click", () => this.view.modal.handleCloseAddModal());
+    this.view.modal.modalEl.addEventListener("submit", this.addContact.bind(this));
+>>>>>>> parent of 69b1f57 (refactor code and add relation select)
   }
 
-  /**
-   * Initializing the controller
-   */
-  init = async () => {
-    await this.initRelations();
-    await this.initContacts();
-    this.initModal();
-  };
-
-  //----- CONTACT CONTROLLER -----//
-
-  /**
-   * Initializing the contact list and contact information.
-   */
-  initContacts = async () => {
+  async addContact(event) {
+    event.preventDefault();
+    const contactData = new FormData(event.target);
     try {
-      await this.model.contact.init();
+      const newContact = await this.model.contact.addContact(contactData);
+      this.view.contact.renderContact(newContact);
+      this.view.modal.handleCloseAddModal();
     } catch {
-      this.displaySnackbar("warning", ERROR_MESSAGE.INIT_CONTACT_LIST);
+      this.displaySnackbar("warning", ERROR_MESSAGE.ADD_CONTACT);
     }
+<<<<<<< HEAD
     this.loadListContacts();
     this.view.contact.addEventAddContact(this.addContact);
   };
@@ -57,6 +64,9 @@ class AddressController {
       this.displaySnackbar("warning", ERROR_MESSAGE.OPEN_ADD_MODAL);
     }
   };
+=======
+  }
+>>>>>>> parent of 69b1f57 (refactor code and add relation select)
 
   /**
    * Add or edit a contact and display the new contact list.
