@@ -2,26 +2,26 @@
   "contacts": [
     {
       "id": "0e4813ba-6617-4b6c-97b0-7af30340e2e6",
-      "name": "Jason Toad",
+      "name": "Thuan Nguyen",
       "relationId": "1",
       "phone": "0943111147",
-      "email": "jasontoad@gmail.com",
+      "email": "thuannguyen@gmail.com",
       "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
     },
     {
       "id": "4b9b59bb-9f80-47e1-959d-6b454bff9726",
-      "name": "Tim Drake",
+      "name": "Toan Le",
       "relationId": "2",
       "phone": "0905678134",
-      "email": "timdrake@gmail.com",
+      "email": "toanle@gmail.com",
       "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
     },
     {
       "id": "0c6831b2-517b-401b-a21a-461a1022ce48",
-      "name": "Damian Wayne",
+      "name": "Dat Truong",
       "relationId": "3",
       "phone": "0905956144",
-      "email": "damianwayne.com",
+      "email": "dattruong@gmail.com",
       "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
     }
   ],
@@ -36,7 +36,11 @@
     },
     {
       "id": "3",
-      "name": "colleague"
+      "name": "co-worker"
+    },
+    {
+      "id": "4",
+      "name": "boss"
     }
   ]
 }
