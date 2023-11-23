@@ -1,12 +1,12 @@
-import wait from "../helpers/wait";
+import wait from '../helpers/wait';
 
 class SnackbarView {
   /**
    * Constructor function for SnackbarView object.
    */
   constructor() {
-    this.snackbarEl = document.querySelector(".snackbar");
-    this.snackbarMsgEl = this.snackbarEl.querySelector(".snackbar__message");
+    this.snackbarEl = document.querySelector('.snackbar');
+    this.snackbarMsgEl = this.snackbarEl.querySelector('.snackbar__message');
   }
 
   //----- RENDERING -----//
@@ -20,10 +20,10 @@ class SnackbarView {
     this.snackbarMsgEl.innerText = message;
 
     await wait(10);
-    this.snackbarEl.classList.add("snackbar--show");
+    this.snackbarEl.classList.add('snackbar--show');
 
     await wait(3000);
-    this.snackbarEl.classList.remove("snackbar--show");
+    this.snackbarEl.classList.remove('snackbar--show');
   };
 }
 

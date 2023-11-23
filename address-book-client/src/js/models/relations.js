@@ -1,5 +1,5 @@
 import RelationService from '../services/relationService';
-import Relation from './relations';
+import Relation from './relation';
 
 class Relations {
   /**

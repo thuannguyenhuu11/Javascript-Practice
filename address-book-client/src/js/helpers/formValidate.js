@@ -1,12 +1,12 @@
-import { MESSAGE, REGEX } from "../constants/message";
+import { MESSAGE, REGEX } from '../constants/message';
 
 /**
  * Form validator check if the information is valid.
  * @param {Object} contact
  * @returns {Boolean} is the form valid.
  */
-const formValidator = contact => {
-  const modalEl = document.querySelector(".modal");
+const formValidator = (contact) => {
+  const modalEl = document.querySelector('.modal');
   const nameInput = modalEl.name;
   const nameError = nameInput.nextElementSibling;
   const phoneInput = modalEl.phone;
@@ -20,10 +20,34 @@ const formValidator = contact => {
 
   // Object to store field validation data
   const fields = [
-    { name: "name", regex: REGEX.NAME, error: nameError, requiredMessage: MESSAGE.NAME_REQUIRED, invalidMessage: MESSAGE.INVALID_NAME },
-    { name: "phone", regex: REGEX.PHONE, error: phoneError, requiredMessage: MESSAGE.PHONE_REQUIRED, invalidMessage: MESSAGE.INVALID_PHONE },
-    { name: "email", regex: REGEX.EMAIL, error: emailError, requiredMessage: MESSAGE.EMAIL_REQUIRED, invalidMessage: MESSAGE.INVALID_EMAIL },
-    { name: "avatar", regex: REGEX.AVATAR, error: avatarError, requiredMessage: MESSAGE.AVATAR_REQUIRED, invalidMessage: MESSAGE.INVALID_AVATAR },
+    {
+      name: 'name',
+      regex: REGEX.NAME,
+      error: nameError,
+      requiredMessage: MESSAGE.NAME_REQUIRED,
+      invalidMessage: MESSAGE.INVALID_NAME,
+    },
+    {
+      name: 'phone',
+      regex: REGEX.PHONE,
+      error: phoneError,
+      requiredMessage: MESSAGE.PHONE_REQUIRED,
+      invalidMessage: MESSAGE.INVALID_PHONE,
+    },
+    {
+      name: 'email',
+      regex: REGEX.EMAIL,
+      error: emailError,
+      requiredMessage: MESSAGE.EMAIL_REQUIRED,
+      invalidMessage: MESSAGE.INVALID_EMAIL,
+    },
+    {
+      name: 'avatar',
+      regex: REGEX.AVATAR,
+      error: avatarError,
+      requiredMessage: MESSAGE.AVATAR_REQUIRED,
+      invalidMessage: MESSAGE.INVALID_AVATAR,
+    },
   ];
 
   // Loop through each field to perform validation
@@ -34,24 +58,24 @@ const formValidator = contact => {
     const errorEl = field.error;
 
     // Check if the field value is empty
-    if (value.trim() === "") {
-      inputEl.classList.add("input--warning");
+    if (value.trim() === '') {
+      inputEl.classList.add('input--warning');
       errorEl.textContent = field.requiredMessage;
-      errorEl.classList.add("warning-text--active");
+      errorEl.classList.add('warning-text--active');
       isValid = false;
     }
     // Check if the field value matches the regex pattern
     else if (!isValidField) {
-      inputEl.classList.add("input--warning");
+      inputEl.classList.add('input--warning');
       errorEl.textContent = field.invalidMessage;
-      errorEl.classList.add("warning-text--active");
+      errorEl.classList.add('warning-text--active');
       isValid = false;
     }
     // If the field is valid, remove any warning styling and message
     else {
-      inputEl.classList.remove("input--warning");
-      errorEl.textContent = "";
-      errorEl.classList.remove("warning-text--active");
+      inputEl.classList.remove('input--warning');
+      errorEl.textContent = '';
+      errorEl.classList.remove('warning-text--active');
     }
   }
   return isValid;

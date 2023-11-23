@@ -31,16 +31,6 @@ class Template {
   static renderRelation = (relation) => `
           <option value="${relation.id}">${relation.name}</option>
       `;
-
-  /**
-   * HTML Template for the relation list filter's dropdown.
-   * @param {Object} relation
-   * @returns {HTMLElement} HTML element for displaying relation in filter options.
-   */
-  static renderRelationDropDown = (relation) => `  
-          <input type="radio" id="${relation.id}" name="filter_option" value="${relation.id}">     
-          <label class="relation-dropdown__li text text--gray text--normal text--lg" for="${relation.id}">${relation.name}</label>
-      `;
 }
 
 export default Template;
