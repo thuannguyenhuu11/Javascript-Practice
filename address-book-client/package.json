@@ -5,6 +5,7 @@
     "start": "parcel",
     "build": "parcel build"
   },
+  "license": "ISC",
   "devDependencies": {
     "@parcel/resolver-glob": "^2.9.3",
     "axios": "^1.6.0",
