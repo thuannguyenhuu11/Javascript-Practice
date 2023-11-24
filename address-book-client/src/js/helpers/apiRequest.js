@@ -1,3 +1,4 @@
+import axios from 'axios';
 class ApiRequest {
   /**
    * Constructor function for ApiRequest object.
@@ -16,7 +17,10 @@ class ApiRequest {
    * @return {Object|Array} response from server.
    */
   get = (id, query) => {
-    return this.sendRequest(`${this.path}${id ? `/${id}/` : ""}${query ? query : ""}`, "GET");
+    return this.sendRequest(
+      `${this.path}${id ? `/${id}/` : ''}${query ? query : ''}`,
+      'GET'
+    );
   };
 
   /**
@@ -24,8 +28,8 @@ class ApiRequest {
    * @param {Object} data
    * @returns {Object} response from server.
    */
-  post = data => {
-    return this.sendRequest(`${this.path}`, "POST", data);
+  post = (data) => {
+    return this.sendRequest(`${this.path}`, 'POST', data);
   };
 
   /**
@@ -35,7 +39,7 @@ class ApiRequest {
    * @returns {Object} response from server.
    */
   put = (id, data) => {
-    return this.sendRequest(`${this.path}/${id}`, "PUT", data);
+    return this.sendRequest(`${this.path}/${id}`, 'PUT', data);
   };
 
   /**
@@ -45,7 +49,7 @@ class ApiRequest {
    * @returns {Object} response from server.
    */
   patch = (id, data, query) => {
-    return this.sendRequest(`${this.path}/${id}`, "PATCH", data);
+    return this.sendRequest(`${this.path}/${id}`, 'PATCH', data);
   };
 
   /**
@@ -53,8 +57,8 @@ class ApiRequest {
    * @param {String} id
    * @returns @returns {Object} response from server.
    */
-  delete = id => {
-    return this.sendRequest(`${this.path}/${id}`, "DELETE");
+  delete = (id) => {
+    return this.sendRequest(`${this.path}/${id}`, 'DELETE');
   };
 
   /**
@@ -64,18 +68,20 @@ class ApiRequest {
    * @return {Object|Array} response from server.
    */
   sendRequest = async (path, method, body) => {
-    const url = `${this.baseUrl}${path}`;
-    const response = await fetch(url, {
-      method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error("Error while sending request");
+    try {
+      const url = `${this.baseUrl}${path}`;
+      const options = {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: body ? JSON.stringify(body) : null,
+      };
+
+      const response = await axios(url, options);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error while sending request: ');
     }
   };
 }

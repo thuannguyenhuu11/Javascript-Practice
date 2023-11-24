@@ -16,6 +16,10 @@
     <script type="module" src="./js/main.js"></script>
   </head>
   <body>
+    <!-- Start Loading Icon -->
+    <div class="loader"></div>
+    <!-- End Loading Icon -->
+
     <!-- Start Header -->
     <include src="sections/header/index.html"></include>
     <!-- End Header -->
@@ -41,5 +45,17 @@
     <!-- Start snackbar -->
     <include src="sections/snackbar/index.html"></include>
     <!-- End snackbar -->
+
+    <!-- <script>
+      window.addEventListener('load', () => {
+        const loader = document.querySelector('.loader');
+
+        loader.classList.add('loader--hidden');
+
+        loader.addEventListener('transitionend', () => {
+          document.body.removeChild(loader);
+        });
+      });
+    </script> -->
   </body>
 </html>
