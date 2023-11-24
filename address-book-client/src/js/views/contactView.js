@@ -8,10 +8,7 @@ class ContactView {
     this.addBtnEl = document.querySelector('.features__add');
   }
 
-  contactEl = '.contact-item';
-
   filterParams = {
-    searchKey: '',
     filter: {
       relation: '0',
     },
