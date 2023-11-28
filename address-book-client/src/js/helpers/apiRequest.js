@@ -68,6 +68,7 @@ class ApiRequest {
    * @return {Object|Array} response from server.
    */
   sendRequest = async (path, method, body) => {
+    this.showLoading();
     try {
       const url = `${this.baseUrl}${path}`;
       const options = {
@@ -79,11 +80,28 @@ class ApiRequest {
       };
 
       const response = await axios(url, options);
+      this.hideLoading();
       return response.data;
     } catch (error) {
+      this.hideLoading();
       throw new Error('Error while sending request: ');
     }
   };
+
+  showLoading() {
+    const loader = document.querySelector('.loading-overlay');
+    loader.classList.add('loading--display');
+    loader.addEventListener('transitionend', () => {
+      document.body.removeChild(loader);
+    });
+  }
+
+  hideLoading() {
+    const loader = document.querySelector('.loading-overlay');
+    if (loader) {
+      loader.classList.remove('loading--display');
+    }
+  }
 }
 
 export default ApiRequest;

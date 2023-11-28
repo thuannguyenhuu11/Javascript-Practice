@@ -17,7 +17,9 @@
   </head>
   <body>
     <!-- Start Loading Icon -->
-    <div class="loader"></div>
+    <div class="loading-overlay">
+      <div class="loading"></div>
+    </div>
     <!-- End Loading Icon -->
 
     <!-- Start Header -->
@@ -45,17 +47,5 @@
     <!-- Start snackbar -->
     <include src="sections/snackbar/index.html"></include>
     <!-- End snackbar -->
-
-    <!-- <script>
-      window.addEventListener('load', () => {
-        const loader = document.querySelector('.loader');
-
-        loader.classList.add('loader--hidden');
-
-        loader.addEventListener('transitionend', () => {
-          document.body.removeChild(loader);
-        });
-      });
-    </script> -->
   </body>
 </html>
