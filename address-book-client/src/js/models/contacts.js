@@ -35,6 +35,26 @@ class Contacts {
     return this.contactList;
   };
 
+  getContactInfo = () => {
+    return this.contactInfo;
+  };
+
+  setContactInfo = (id) => {
+    const data = this.contactList.find((contact) => contact.id === id);
+    this.contactInfo = new Contact(data);
+  };
+
+  /**
+   * Get contact infomation by ID.
+   * @param {String} id
+   * @returns {Object} contact information object.
+   */
+  getContactById = async (id) => {
+    const data = await this.service.getContactById(id);
+    this.contactInfo = new Contact(data);
+    return this.contactInfo;
+  };
+
   /**
    * Create a new contact object.
    * @param {Object} data
@@ -61,6 +81,7 @@ class Contacts {
     await this.service.addContact(contact);
     contact = { ...contact, relation: getRelationById(contact.relationId) };
     this.contactList.push(contact);
+    this.contactInfo = contact;
   };
 
   /**

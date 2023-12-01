@@ -32,7 +32,10 @@ class AddressController {
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.INIT_CONTACT_LIST);
     }
+    this.loadListContacts();
+    this.showInfo();
     this.view.contact.addEventAddContact(this.addContact);
+    this.view.contact.addDelegateShowInfo(this.showInfo);
   };
 
   /**
@@ -46,6 +49,20 @@ class AddressController {
       this.view.contact.renderContactList(contacts);
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_LIST);
+    }
+  };
+
+  /**
+   * Display the contact information by contact's id or by default.
+   * @param {String} contactId
+   */
+  showInfo = async (contactId) => {
+    if (contactId) this.model.contact.setContactInfo(contactId);
+    const contactInfo = this.model.contact.getContactInfo();
+    try {
+      this.view.contact.renderContactInfo(contactInfo);
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_INFO);
     }
   };
 
@@ -78,6 +95,7 @@ class AddressController {
       }
     }
     this.loadListContacts();
+    this.showInfo(contact.id);
   };
 
   //----- RELATION CONTROLLER -----//

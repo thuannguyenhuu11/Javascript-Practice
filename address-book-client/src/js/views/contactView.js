@@ -5,6 +5,7 @@ class ContactView {
    */
   constructor() {
     this.contactListEl = document.querySelector('.contacts__list');
+    this.infoEl = document.querySelector('.info');
     this.addBtnEl = document.querySelector('.features__add');
   }
 
@@ -36,7 +37,36 @@ class ContactView {
     this.contactListEl.innerHTML += contactTemplate;
   };
 
+  /**
+   * Render contact infomation.
+   * @param {Object} contactInfo
+   */
+  renderContactInfo = (contactInfo) => {
+    if (contactInfo) {
+      this.infoEl.innerHTML = Template.renderContactInfo(contactInfo);
+    } else {
+      this.infoEl.innerHTML = '';
+    }
+  };
+
   //----- EVENT HANDLER -----//
+  /**
+   * Add delegate lisnter showing contact information actions to each contact element.
+   * @param {Function} showInfo
+   */
+  addDelegateShowInfo = (showInfo) => {
+    this.contactListEl.addEventListener('click', (event) => {
+      this.contactListEl
+        .querySelector(this.contactEl + '.contact-item--active')
+        ?.classList.remove('contact-item--active');
+      const el = event.target.closest(this.contactEl);
+      if (el) {
+        el.classList.add('contact-item--active');
+        const contactId = el.getAttribute('data-id');
+        showInfo(contactId);
+      }
+    });
+  };
 
   /**
    * Add event listener adding a contact action to the add contact button.
