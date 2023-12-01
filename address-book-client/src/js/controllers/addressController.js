@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/message';
 
 class AddressController {
@@ -29,10 +28,10 @@ class AddressController {
   initContacts = async () => {
     try {
       await this.model.contact.init();
+      this.loadListContacts();
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.INIT_CONTACT_LIST);
     }
-    this.loadListContacts();
     this.view.contact.addEventAddContact(this.addContact);
   };
 
@@ -67,17 +66,10 @@ class AddressController {
    */
   saveContact = async (contact) => {
     if (!contact.id) {
-      contact = {
-        id: uuidv4(),
-        name: contact.name,
-        relationId: contact.relationId,
-        phone: contact.phone,
-        email: contact.email,
-        avatar: contact.avatar,
-      };
       try {
+        const newContact = this.model.contact.createContact(contact);
         await this.model.contact.addContact(
-          contact,
+          newContact,
           this.model.relation.getRelationById
         );
         this.displaySnackbar('success', SUCCESS_MESSAGE.ADD_CONTACT);

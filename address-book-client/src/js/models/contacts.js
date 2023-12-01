@@ -1,5 +1,6 @@
 import ContactService from '../services/contactService';
 import Contact from './contact';
+import { v4 as uuidv4 } from 'uuid';
 
 class Contacts {
   /**
@@ -35,17 +36,31 @@ class Contacts {
   };
 
   /**
+   * Create a new contact object.
+   * @param {Object} data
+   * @returns {Contact} new contact object.
+   */
+  createContact = (data) => {
+    const newContact = new Contact({
+      id: uuidv4(),
+      name: data.name,
+      relationId: data.relationId,
+      phone: data.phone,
+      email: data.email,
+      avatar: data.avatar,
+    });
+    return newContact;
+  };
+
+  /**
    * Add contact to contact list and database.
    * @param {Object} data
    */
   addContact = async (data, getRelationById) => {
-    console.log(data);
     let contact = new Contact(data);
     await this.service.addContact(contact);
     contact = { ...contact, relation: getRelationById(contact.relationId) };
     this.contactList.push(contact);
-    console.log(this.contactList);
-    this.contactInfo = contact;
   };
 
   /**
