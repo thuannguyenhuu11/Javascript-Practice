@@ -1,0 +1,50 @@
+{
+  "contacts": [
+    {
+      "id": "0e4813ba-6617-4b6c-97b0-7af30340e2e6",
+      "name": "Thuan Nguyen",
+      "relationId": "1",
+      "phone": "0943111147",
+      "email": "thuannguyen@gmail.com",
+      "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
+    },
+    {
+      "id": "4b9b59bb-9f80-47e1-959d-6b454bff9726",
+      "name": "Toan Le",
+      "relationId": "2",
+      "phone": "0905678134",
+      "email": "toanle@gmail.com",
+      "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
+    },
+    {
+      "id": "0c6831b2-517b-401b-a21a-461a1022ce48",
+      "name": "Dat Truong",
+      "relationId": "3",
+      "phone": "0905956144",
+      "email": "dattruong@gmail.com",
+      "avatar": "https://i.pinimg.com/236x/a1/9d/fd/a19dfd0cd5b84390c983b372c91b7f22.jpg"
+    },
+    {
+      "id": "e17af35b-2958-49f2-a57b-7ee489f14307",
+      "name": "Thuan Nguyen",
+      "relationId": "1",
+      "phone": "0991540514",
+      "email": "fdkigneel@gmail.com",
+      "avatar": "https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien-600x600.jpg"
+    }
+  ],
+  "relations": [
+    {
+      "id": "1",
+      "name": "family"
+    },
+    {
+      "id": "2",
+      "name": "friend"
+    },
+    {
+      "id": "3",
+      "name": "co-worker"
+    }
+  ]
+}

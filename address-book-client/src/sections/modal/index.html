@@ -4,33 +4,52 @@
   </div>
   <div class="modal__inputs">
     <div class="modal__inputs__field">
-      <label for="name" class="text text--gray text--bold text--xl">Name *</label>
-      <input id="name" type="text" name="name" class="input text text--normal text--lg" />
-      <span class="warning-text text text--warning text--xs text--medium"></span>
+      <p class="text text--gray text--bold text--xl">Name *</p>
+      <input type="text" name="name" class="input text text--normal text--lg" />
+      <span
+        class="warning-text text text--warning text--xs text--medium"
+      ></span>
     </div>
     <div class="modal__inputs__field">
-      <label for="relation" class="text text--gray text--bold text--xl">Relation *</label>
-      <input id="relation" type="text" name="relation" class="input text text--normal text--lg" />
-      <span class="warning-text text text--warning text--xs text--medium"></span>
+      <p class="text text--gray text--bold text--xl">Relation *</p>
+      <select name="relation" class="relation-list text text--normal text--lg">
+        <!-- Place to relation template -->
+      </select>
     </div>
     <div class="modal__inputs__field">
-      <label for="phone" class="text text--gray text--bold text--xl">Phone number *</label>
-      <input id="phone" pattern="[0-9]*" type="number" name="phone" class="mz-input text text--normal text--lg" />
-      <span class="warning-text text text--warning text--xs text--medium"></span>
+      <p class="text text--gray text--bold text--xl">Phone number *</p>
+      <input type="number" name="phone" class="text text--normal text--lg" />
+      <span
+        class="warning-text text text--warning text--xs text--medium"
+      ></span>
     </div>
     <div class="modal__inputs__field">
-      <label for="avatar" class="text text--gray text--bold text--xl">Image *</label>
-      <input id="avatar" name="avatar" class="text text--normal text--lg" />
-      <span class="warning-text text text--warning text--xs text--medium"></span>
+      <p class="text text--gray text--bold text--xl">Image *</p>
+      <input type="url" name="avatar" class="text text--normal text--lg" />
+      <span
+        class="warning-text text text--warning text--xs text--medium"
+      ></span>
     </div>
     <div class="modal__inputs__field">
-      <label for="email" class="text text--gray text--bold text--xl">Email *</label>
-      <input id="email" type="text" name="email" class="text text--normal text--lg" />
-      <span class="warning-text text text--warning text--xs text--medium"></span>
+      <p class="text text--gray text--bold text--xl">Email *</p>
+      <input type="email" name="email" class="text text--normal text--lg" />
+      <span
+        class="warning-text text text--warning text--xs text--medium"
+      ></span>
     </div>
   </div>
   <div class="modal__buttons">
-    <button type="submit" class="modal__buttons__submit btn btn--primary text text--white text--semibold text--xl">Submit</button>
-    <button type="button" class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl">Cancel</button>
+    <button
+      type="submit"
+      class="modal__buttons__submit btn btn--primary text text--white text--semibold text--xl"
+    >
+      Submit
+    </button>
+    <button
+      type="button"
+      class="modal__buttons__cancel btn btn--secondary text text--white text--semibold text--xl"
+    >
+      Cancel
+    </button>
   </div>
 </form>

@@ -4,14 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/main.css" />
-
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./assets/icons/address-book-icon.png"
+    />
     <!-- Primary Meta Tags -->
     <title>Address Book</title>
     <meta name="title" content="Address Book" />
     <meta name="description" content="Have more friends, have more fun" />
-    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </head>
   <body>
+    <!-- Start Loading Icon -->
+    <div class="loading-overlay">
+      <div class="loading"></div>
+    </div>
+    <!-- End Loading Icon -->
+
     <!-- Start Header -->
     <include src="sections/header/index.html"></include>
     <!-- End Header -->
@@ -31,8 +41,11 @@
     <!-- End overlay -->
 
     <!-- Start modal -->
-    <include src="sections/modal/index.html"><
+    <include src="sections/modal/index.html"></include>
     <!-- End modal -->
-    
+
+    <!-- Start snackbar -->
+    <include src="sections/snackbar/index.html"></include>
+    <!-- End snackbar -->
   </body>
 </html>
