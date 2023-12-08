@@ -67,35 +67,26 @@ class ApiRequest {
    * @param {Object} body
    * @return {Object|Array} response from server.
    */
-  sendRequest = async (path, method, body) => {
-    this.toggleLoading(true);
+  sendRequest = async (path, method, body = null) => {
     try {
       const url = `${this.baseUrl}${path}`;
       const options = {
         method: method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: body ? JSON.stringify(body) : null,
+        url: url,
+        headers: { 'Content-Type': 'application/json' },
       };
 
-      const response = await axios(url, options);
-      this.toggleLoading(false);
+      // Include the body in the request if it's not null
+      if (body) {
+        options.data = body;
+      }
+
+      const response = await axios(options);
       return response.data;
     } catch (error) {
-      this.toggleLoading(false);
-      throw new Error('Error while sending request: ');
+      throw new Error(`Error while sending request`);
     }
   };
-
-  toggleLoading(isShowLoading) {
-    const loading = document.querySelector('.loading-overlay');
-    if (isShowLoading) {
-      loading.classList.add('loading--display');
-    } else {
-      loading.classList.remove('loading--display');
-    }
-  }
 }
 
 export default ApiRequest;

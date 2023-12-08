@@ -41,9 +41,13 @@ class ContactView {
    * Render contact infomation.
    * @param {Object} contactInfo
    */
-  renderContactInfo = (contactInfo) => {
+  renderContactInfo = (contactInfo, confirmDelete, editContact) => {
     if (contactInfo) {
       this.infoEl.innerHTML = Template.renderContactInfo(contactInfo);
+      this.deleteBtnEl = this.infoEl.querySelector('.info__button__delete');
+      this.editBtnEl = this.infoEl.querySelector('.info__button__edit');
+      this.addEventDeleteContact(this.deleteBtnEl, confirmDelete);
+      this.addEventEditContact(this.editBtnEl, editContact);
     } else {
       this.infoEl.innerHTML = '';
     }
@@ -75,6 +79,28 @@ class ContactView {
   addEventAddContact = (addContact) => {
     this.addBtnEl.addEventListener('click', () => {
       addContact();
+    });
+  };
+
+  /**
+   * Add event listener deleting a contact action to the delete contact button.
+   * @param {Function} confirmDelete
+   */
+  addEventDeleteContact = (el, confirmDelete) => {
+    el.addEventListener('click', (event) => {
+      const contactId = event.target.parentNode.getAttribute('data-id');
+      confirmDelete(contactId);
+    });
+  };
+
+  /**
+   * Add event listener editing a contact action to the edit contact button.
+   * @param {Function} editContact
+   */
+  addEventEditContact = (el, editContact) => {
+    el.addEventListener('click', (event) => {
+      const contactId = event.target.parentNode.getAttribute('data-id');
+      editContact(contactId);
     });
   };
 }

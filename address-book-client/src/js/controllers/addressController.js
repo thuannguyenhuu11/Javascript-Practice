@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/message';
 
 class AddressController {
@@ -29,13 +30,12 @@ class AddressController {
     try {
       await this.model.contact.init();
       this.loadListContacts();
+      this.showInfo();
+      this.view.contact.addEventAddContact(this.addContact);
+      this.view.contact.addDelegateShowInfo(this.showInfo);
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.INIT_CONTACT_LIST);
     }
-    this.loadListContacts();
-    this.showInfo();
-    this.view.contact.addEventAddContact(this.addContact);
-    this.view.contact.addDelegateShowInfo(this.showInfo);
   };
 
   /**
@@ -60,9 +60,34 @@ class AddressController {
     if (contactId) this.model.contact.setContactInfo(contactId);
     const contactInfo = this.model.contact.getContactInfo();
     try {
-      this.view.contact.renderContactInfo(contactInfo);
+      this.view.contact.renderContactInfo(
+        contactInfo,
+        this.confirmDelete,
+        this.editContact
+      );
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_INFO);
+    }
+  };
+
+  /**
+   * Show the confirm modal when delete a contact.
+   * @param {String} contactId
+   */
+  confirmDelete = async (contactId) => {
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(
+        contactId,
+        this.model.relation.getRelationById
+      );
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO);
+    }
+    try {
+      this.view.modal.openConfirmModal(contact);
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
     }
   };
 
@@ -74,6 +99,42 @@ class AddressController {
       this.view.modal.openModal();
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_ADD_MODAL);
+    }
+  };
+
+  /**
+   * Delete a contact by ID action.
+   * @param {String} contactId
+   */
+  deleteContact = async (contactId) => {
+    try {
+      await this.model.contact.deleteContactById(contactId);
+      this.loadListContacts();
+      this.showInfo();
+      this.displaySnackbar('success', SUCCESS_MESSAGE.DELETE_CONTACT);
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.DELETE_CONTACT);
+    }
+  };
+
+  /**
+   * Show a modal for editing when click edit contact.
+   * @param {String} contactId
+   */
+  editContact = async (contactId) => {
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(
+        contactId,
+        this.model.relation.getRelationById
+      );
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO);
+    }
+    try {
+      this.view.modal.openModal(contactId, contact);
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_EDIT_MODAL);
     }
   };
 
@@ -92,6 +153,17 @@ class AddressController {
         this.displaySnackbar('success', SUCCESS_MESSAGE.ADD_CONTACT);
       } catch {
         this.displaySnackbar('warning', ERROR_MESSAGE.ADD_CONTACT);
+      }
+    } else {
+      try {
+        const newContact = this.model.contact.createContact(contact);
+        await this.model.contact.editContact(
+          newContact,
+          this.model.relation.getRelationById
+        );
+        this.displaySnackbar('success', SUCCESS_MESSAGE.EDIT_CONTACT);
+      } catch {
+        this.displaySnackbar('warning', ERROR_MESSAGE.EDIT_CONTACT);
       }
     }
     this.loadListContacts();
@@ -120,7 +192,9 @@ class AddressController {
    */
   initModal = async () => {
     this.view.modal.addEventSubmission(this.saveContact);
+    this.view.modal.addEventDeleteConfirmed(this.deleteContact);
     this.view.modal.addEventCancelModal();
+    this.view.modal.addEventCancelConfirmed();
     this.view.modal.addEventClickOutside();
   };
 
