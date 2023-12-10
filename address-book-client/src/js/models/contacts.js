@@ -1,5 +1,6 @@
 import ContactService from '../services/contactService';
 import Contact from './contact';
+import { v4 as uuidv4 } from 'uuid';
 
 class Contacts {
   /**
@@ -118,14 +119,22 @@ class Contacts {
    * @returns {Array} result list after filter
    */
   filterList = (params) => {
-    const { filter } = params;
+    const { filter, searchKey } = params;
     const result = this.contactList.filter((contact) => {
       let isMatchFilter = true;
+      let isMatchSearch = true;
       // Match with filter
       if (filter.relation !== '0') {
         isMatchFilter = contact.relation.id === filter.relation;
       }
-      return isMatchFilter;
+      // Match with search key
+      if (searchKey) {
+        const fields = ['name', 'phone', 'email'];
+        isMatchSearch = fields.some((field) =>
+          contact[field].toString().toLowerCase().includes(searchKey)
+        );
+      }
+      return isMatchFilter && isMatchSearch;
     });
     this.contactInfo = result[0];
     return result;

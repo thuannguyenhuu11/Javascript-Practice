@@ -7,9 +7,13 @@ class ContactView {
     this.contactListEl = document.querySelector('.contacts__list');
     this.infoEl = document.querySelector('.info');
     this.addBtnEl = document.querySelector('.features__add');
+    this.searchInputEl = document.querySelector('.features__search__input');
   }
 
+  contactEl = '.contact-item';
+
   filterParams = {
+    searchKey: '',
     filter: {
       relation: '0',
     },
@@ -54,6 +58,7 @@ class ContactView {
   };
 
   //----- EVENT HANDLER -----//
+
   /**
    * Add delegate lisnter showing contact information actions to each contact element.
    * @param {Function} showInfo
@@ -101,6 +106,17 @@ class ContactView {
     el.addEventListener('click', (event) => {
       const contactId = event.target.parentNode.getAttribute('data-id');
       editContact(contactId);
+    });
+  };
+
+  /**
+   * Add event listener searching contacts to the search input.
+   * @param {Function} searchContact
+   */
+  addEventSearchContact = (filterContact) => {
+    this.searchInputEl.addEventListener('keyup', (event) => {
+      this.filterParams.searchKey = event.target.value.toLowerCase();
+      filterContact(this.filterParams);
     });
   };
 }

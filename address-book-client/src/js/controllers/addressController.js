@@ -1,7 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/message';
-
-class AddressController {
+class addressController {
   /**
    * Constructor of Controller object
    * @param {Object} model
@@ -33,6 +31,7 @@ class AddressController {
       this.showInfo();
       this.view.contact.addEventAddContact(this.addContact);
       this.view.contact.addDelegateShowInfo(this.showInfo);
+      this.view.contact.addEventSearchContact(this.filterContact);
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.INIT_CONTACT_LIST);
     }
@@ -139,6 +138,14 @@ class AddressController {
   };
 
   /**
+   * Display the result while searching in contact list.
+   */
+  filterContact = () => {
+    this.loadListContacts();
+    this.showInfo();
+  };
+
+  /**
    * Add or edit a contact and display the new contact list.
    * @param {Object} contact
    */
@@ -156,9 +163,8 @@ class AddressController {
       }
     } else {
       try {
-        const newContact = this.model.contact.createContact(contact);
         await this.model.contact.editContact(
-          newContact,
+          contact,
           this.model.relation.getRelationById
         );
         this.displaySnackbar('success', SUCCESS_MESSAGE.EDIT_CONTACT);
@@ -169,7 +175,6 @@ class AddressController {
     this.loadListContacts();
     this.showInfo(contact.id);
   };
-
   //----- RELATION CONTROLLER -----//
 
   /**
@@ -210,4 +215,4 @@ class AddressController {
   };
 }
 
-export default AddressController;
+export default addressController;

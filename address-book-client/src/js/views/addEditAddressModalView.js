@@ -10,7 +10,7 @@ class AddEditAddressModalView {
     this.confirmModalEl = document.querySelector('.confirm-modal');
     this.overlayEl = document.querySelector('.overlay');
     this.cancelModalBtnEl = this.modalEl.querySelectorAll(
-      '.modal__buttons__cancel'
+      '.modal__top__btn,.modal__buttons__cancel'
     );
     this.confirmBtnEl = this.confirmModalEl.querySelector(
       '.confirm-modal__buttons__confirm'
@@ -55,7 +55,7 @@ class AddEditAddressModalView {
   };
 
   /**
-   * Close adding contact modal
+   * Close adding or editing contact modal
    */
   closeModal = () => {
     this.modalEl.classList.remove('modal--active');
@@ -118,7 +118,6 @@ class AddEditAddressModalView {
    * Add event listener for Cancel button in Adding or Editing modal.
    */
   addEventCancelModal = () => {
-    console.log(this.cancelModalBtnEl);
     this.cancelModalBtnEl.forEach((el) =>
       el.addEventListener('click', () => this.closeModal())
     );
