@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 class ApiRequest {
   /**
    * Constructor function for ApiRequest object.
@@ -67,24 +68,20 @@ class ApiRequest {
    * @param {Object} body
    * @return {Object|Array} response from server.
    */
-  sendRequest = async (path, method, body = null) => {
+  sendRequest = async (path, method, body) => {
+    const url = `${this.baseUrl}${path}`;
     try {
-      const url = `${this.baseUrl}${path}`;
-      const options = {
-        method: method,
-        url: url,
+      const response = await axios({
+        method,
+        url,
+        data: body,
         headers: { 'Content-Type': 'application/json' },
-      };
-
-      // Include the body in the request if it's not null
-      if (body) {
-        options.data = body;
-      }
-
-      const response = await axios(options);
+      });
       return response.data;
     } catch (error) {
-      throw new Error(`Error while sending request`);
+      throw new Error(
+        error.response ? error.response.data : 'Error while sending request'
+      );
     }
   };
 }
