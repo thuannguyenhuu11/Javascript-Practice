@@ -69,6 +69,7 @@ class ApiRequest {
    * @return {Object|Array} response from server.
    */
   sendRequest = async (path, method, body) => {
+    this.toggleLoading(true);
     const url = `${this.baseUrl}${path}`;
     try {
       const response = await axios({
@@ -77,6 +78,7 @@ class ApiRequest {
         data: body,
         headers: { 'Content-Type': 'application/json' },
       });
+      this.toggleLoading(false);
       return response.data;
     } catch (error) {
       throw new Error(
@@ -84,6 +86,15 @@ class ApiRequest {
       );
     }
   };
+
+  toggleLoading(isShowLoading) {
+    const loading = document.querySelector('.loading-overlay');
+    if (isShowLoading) {
+      loading.classList.add('loading--display');
+    } else {
+      loading.classList.remove('loading--display');
+    }
+  }
 }
 
 export default ApiRequest;
