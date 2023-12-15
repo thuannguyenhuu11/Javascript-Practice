@@ -1,4 +1,5 @@
 import formValidator from '../helpers/formValidate';
+import { MESSAGE } from '../constants/message';
 
 class AddEditAddressModalView {
   /**
@@ -6,9 +7,16 @@ class AddEditAddressModalView {
    */
   constructor() {
     this.modalEl = document.querySelector('.modal');
+    this.confirmModalEl = document.querySelector('.confirm-modal');
     this.overlayEl = document.querySelector('.overlay');
     this.cancelModalBtnEl = this.modalEl.querySelectorAll(
-      '.modal__buttons__cancel'
+      '.modal__top__btn,.modal__buttons__cancel'
+    );
+    this.confirmBtnEl = this.confirmModalEl.querySelector(
+      '.confirm-modal__buttons__confirm'
+    );
+    this.cancelConfirmBtnEl = this.confirmModalEl.querySelector(
+      '.confirm-modal__buttons__cancel'
     );
   }
 
@@ -34,7 +42,20 @@ class AddEditAddressModalView {
   };
 
   /**
-   * Close adding contact modal
+   * Display confirm modal when delete a contact.
+   * @param {Object} contact
+   */
+  openConfirmModal = (contact) => {
+    this.confirmModalEl.classList.add('confirm-modal--active');
+    this.overlayEl.classList.add('overlay--active');
+    this.confirmModalEl.setAttribute('data-id', contact.id);
+    this.confirmModalEl.querySelector(
+      '.confirm-modal__message'
+    ).innerText = `${MESSAGE.CONFIRM_MESSAGE}${contact.name}`;
+  };
+
+  /**
+   * Close adding or editing contact modal
    */
   closeModal = () => {
     this.modalEl.classList.remove('modal--active');
@@ -45,6 +66,15 @@ class AddEditAddressModalView {
       El.classList.remove('input--warning');
       El.nextElementSibling.classList.remove('warning-text--active');
     });
+  };
+
+  /**
+   * Close confirm delete modal
+   */
+  closeConfirmModal = () => {
+    this.confirmModalEl.classList.remove('confirm-modal--active');
+    this.confirmModalEl.removeAttribute('data-id');
+    this.overlayEl.classList.remove('overlay--active');
   };
 
   //----- EVENT HANDLER -----//
@@ -72,12 +102,33 @@ class AddEditAddressModalView {
   };
 
   /**
+   * Add event listener for Yes button in Confirm delete modal.
+   * @param {Function} deleteContact
+   */
+  addEventDeleteConfirmed = (deleteContact) => {
+    this.confirmBtnEl.addEventListener('click', () => {
+      const id = this.confirmModalEl.getAttribute('data-id');
+      this.confirmModalEl.classList.remove('confirm-modal--active');
+      this.overlayEl.classList.remove('overlay--active');
+      deleteContact(id);
+    });
+  };
+
+  /**
    * Add event listener for Cancel button in Adding or Editing modal.
    */
   addEventCancelModal = () => {
-    console.log(this.cancelModalBtnEl);
     this.cancelModalBtnEl.forEach((el) =>
       el.addEventListener('click', () => this.closeModal())
+    );
+  };
+
+  /**
+   * Add event listener for Cancel button in Confirming modal
+   */
+  addEventCancelConfirmed = () => {
+    this.cancelConfirmBtnEl.addEventListener('click', () =>
+      this.closeConfirmModal()
     );
   };
 

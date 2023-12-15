@@ -7,9 +7,13 @@ class ContactView {
     this.contactListEl = document.querySelector('.contacts__list');
     this.infoEl = document.querySelector('.info');
     this.addBtnEl = document.querySelector('.features__add');
+    this.searchInputEl = document.querySelector('.features__search__input');
   }
 
+  contactEl = '.contact-item';
+
   filterParams = {
+    searchKey: '',
     filter: {
       relation: '0',
     },
@@ -41,15 +45,20 @@ class ContactView {
    * Render contact infomation.
    * @param {Object} contactInfo
    */
-  renderContactInfo = (contactInfo) => {
+  renderContactInfo = (contactInfo, confirmDelete, editContact) => {
     if (contactInfo) {
       this.infoEl.innerHTML = Template.renderContactInfo(contactInfo);
+      this.deleteBtnEl = this.infoEl.querySelector('.info__button__delete');
+      this.editBtnEl = this.infoEl.querySelector('.info__button__edit');
+      this.addEventDeleteContact(this.deleteBtnEl, confirmDelete);
+      this.addEventEditContact(this.editBtnEl, editContact);
     } else {
       this.infoEl.innerHTML = '';
     }
   };
 
   //----- EVENT HANDLER -----//
+
   /**
    * Add delegate lisnter showing contact information actions to each contact element.
    * @param {Function} showInfo
@@ -75,6 +84,39 @@ class ContactView {
   addEventAddContact = (addContact) => {
     this.addBtnEl.addEventListener('click', () => {
       addContact();
+    });
+  };
+
+  /**
+   * Add event listener deleting a contact action to the delete contact button.
+   * @param {Function} confirmDelete
+   */
+  addEventDeleteContact = (el, confirmDelete) => {
+    el.addEventListener('click', (event) => {
+      const contactId = event.target.parentNode.getAttribute('data-id');
+      confirmDelete(contactId);
+    });
+  };
+
+  /**
+   * Add event listener editing a contact action to the edit contact button.
+   * @param {Function} editContact
+   */
+  addEventEditContact = (el, editContact) => {
+    el.addEventListener('click', (event) => {
+      const contactId = event.target.parentNode.getAttribute('data-id');
+      editContact(contactId);
+    });
+  };
+
+  /**
+   * Add event listener searching contacts to the search input.
+   * @param {Function} searchContact
+   */
+  addEventSearchContact = (filterContact) => {
+    this.searchInputEl.addEventListener('keyup', (event) => {
+      this.filterParams.searchKey = event.target.value.toLowerCase();
+      filterContact(this.filterParams);
     });
   };
 }

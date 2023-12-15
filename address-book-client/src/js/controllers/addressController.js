@@ -1,6 +1,5 @@
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../constants/message';
-
-class AddressController {
+class addressController {
   /**
    * Constructor of Controller object
    * @param {Object} model
@@ -29,13 +28,13 @@ class AddressController {
     try {
       await this.model.contact.init();
       this.loadListContacts();
+      this.showInfo();
+      this.view.contact.addEventAddContact(this.addContact);
+      this.view.contact.addDelegateShowInfo(this.showInfo);
+      this.view.contact.addEventSearchContact(this.filterContact);
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.INIT_CONTACT_LIST);
     }
-    this.loadListContacts();
-    this.showInfo();
-    this.view.contact.addEventAddContact(this.addContact);
-    this.view.contact.addDelegateShowInfo(this.showInfo);
   };
 
   /**
@@ -60,9 +59,34 @@ class AddressController {
     if (contactId) this.model.contact.setContactInfo(contactId);
     const contactInfo = this.model.contact.getContactInfo();
     try {
-      this.view.contact.renderContactInfo(contactInfo);
+      this.view.contact.renderContactInfo(
+        contactInfo,
+        this.confirmDelete,
+        this.editContact
+      );
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.RENDER_CONTACT_INFO);
+    }
+  };
+
+  /**
+   * Show the confirm modal when delete a contact.
+   * @param {String} contactId
+   */
+  confirmDelete = async (contactId) => {
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(
+        contactId,
+        this.model.relation.getRelationById
+      );
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO);
+    }
+    try {
+      this.view.modal.openConfirmModal(contact);
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_CONFIRM_MODAL);
     }
   };
 
@@ -75,6 +99,50 @@ class AddressController {
     } catch {
       this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_ADD_MODAL);
     }
+  };
+
+  /**
+   * Delete a contact by ID action.
+   * @param {String} contactId
+   */
+  deleteContact = async (contactId) => {
+    try {
+      await this.model.contact.deleteContactById(contactId);
+      this.loadListContacts();
+      this.showInfo();
+      this.displaySnackbar('success', SUCCESS_MESSAGE.DELETE_CONTACT);
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.DELETE_CONTACT);
+    }
+  };
+
+  /**
+   * Show a modal for editing when click edit contact.
+   * @param {String} contactId
+   */
+  editContact = async (contactId) => {
+    let contact;
+    try {
+      contact = await this.model.contact.getContactById(
+        contactId,
+        this.model.relation.getRelationById
+      );
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.GET_CONTACT_INFO);
+    }
+    try {
+      this.view.modal.openModal(contactId, contact);
+    } catch {
+      this.displaySnackbar('warning', ERROR_MESSAGE.OPEN_EDIT_MODAL);
+    }
+  };
+
+  /**
+   * Display the result while searching in contact list.
+   */
+  filterContact = () => {
+    this.loadListContacts();
+    this.showInfo();
   };
 
   /**
@@ -93,11 +161,20 @@ class AddressController {
       } catch {
         this.displaySnackbar('warning', ERROR_MESSAGE.ADD_CONTACT);
       }
+    } else {
+      try {
+        await this.model.contact.editContact(
+          contact,
+          this.model.relation.getRelationById
+        );
+        this.displaySnackbar('success', SUCCESS_MESSAGE.EDIT_CONTACT);
+      } catch {
+        this.displaySnackbar('warning', ERROR_MESSAGE.EDIT_CONTACT);
+      }
     }
     this.loadListContacts();
     this.showInfo(contact.id);
   };
-
   //----- RELATION CONTROLLER -----//
 
   /**
@@ -120,7 +197,9 @@ class AddressController {
    */
   initModal = async () => {
     this.view.modal.addEventSubmission(this.saveContact);
+    this.view.modal.addEventDeleteConfirmed(this.deleteContact);
     this.view.modal.addEventCancelModal();
+    this.view.modal.addEventCancelConfirmed();
     this.view.modal.addEventClickOutside();
   };
 
@@ -136,4 +215,4 @@ class AddressController {
   };
 }
 
-export default AddressController;
+export default addressController;

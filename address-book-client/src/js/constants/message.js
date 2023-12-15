@@ -2,15 +2,15 @@
  * Message for the form validator.
  */
 export const MESSAGE = {
-  NAME_REQUIRED: "The contact name is required",
-  INVALID_NAME: "The contact name is invalid",
-  PHONE_REQUIRED: "The phone number is required",
-  INVALID_PHONE: "The phone number is invalid",
-  EMAIL_REQUIRED: "The email address is required",
-  INVALID_EMAIL: "The email address is invalid",
-  AVATAR_REQUIRED: "The avatar is required",
-  INVALID_AVATAR: "The avatar is invalid",
-  CONFIRM_MESSAGE: "Do you want to delete contact: ",
+  NAME_REQUIRED: 'The contact name is required',
+  INVALID_NAME: 'The contact name is invalid',
+  PHONE_REQUIRED: 'The phone number is required',
+  INVALID_PHONE: 'The phone number is invalid',
+  EMAIL_REQUIRED: 'The email address is required',
+  INVALID_EMAIL: 'The email address is invalid',
+  AVATAR_REQUIRED: 'The avatar is required',
+  INVALID_AVATAR: 'The avatar is invalid',
+  CONFIRM_MESSAGE: 'Do you want to delete contact: ',
 };
 
 /**
@@ -34,9 +34,9 @@ export const ERROR_MESSAGE = {
  * Message for alert if the action be done successfully.
  */
 export const SUCCESS_MESSAGE = {
-  ADD_CONTACT: "Add contact successfully",
-  EDIT_CONTACT: "Edit contact successfully",
-  DELETE_CONTACT: "Delete contact successfully",
+  ADD_CONTACT: 'Add contact successfully',
+  EDIT_CONTACT: 'Edit contact successfully',
+  DELETE_CONTACT: 'Delete contact successfully',
 };
 
 /**
@@ -53,5 +53,5 @@ export const REGEX = {
  * Optinal API query for fetching data from json-server
  */
 export const QUERY = {
-  EXPAND_RELATION: "?_expand=relation",
+  EXPAND_RELATION: '?_expand=relation',
 };

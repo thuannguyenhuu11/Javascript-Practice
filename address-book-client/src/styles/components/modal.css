@@ -8,15 +8,13 @@
 
   width: 80%;
   max-width: 968px;
-  height: 95%;
-  max-height: 797px;
   border-radius: 30px;
 
   background-color: var(--bg-light-color);
 
-  padding: 52px;
+  padding: 45px;
 
-  scale: 0.9;
+  scale: 0.8;
 }
 
 .modal--active {
@@ -39,7 +37,7 @@
   column-gap: 55px;
   row-gap: 45px;
 
-  margin: 67px 0 86px;
+  margin: 50px 0 50px;
 }
 
 .modal__inputs__field {
@@ -47,22 +45,17 @@
   flex-direction: column;
 }
 
-.modal__inputs__field > label {
+.modal__inputs__field > p {
   margin-bottom: 13px;
 }
 
-.modal__inputs__field > span {
-  display: none;
-  margin-top: 7px;
-}
-
 .modal__inputs__field > .warning-text {
-  display: none;
+  visibility: hidden;
   margin-top: 7px;
 }
 
 .modal__inputs__field > .warning-text--active {
-  display: block;
+  visibility: visible;
 }
 
 .modal__inputs__field > input,

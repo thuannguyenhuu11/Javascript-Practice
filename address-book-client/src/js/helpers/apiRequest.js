@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 class ApiRequest {
   /**
    * Constructor function for ApiRequest object.
@@ -69,22 +70,20 @@ class ApiRequest {
    */
   sendRequest = async (path, method, body) => {
     this.toggleLoading(true);
+    const url = `${this.baseUrl}${path}`;
     try {
-      const url = `${this.baseUrl}${path}`;
-      const options = {
-        method: method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: body ? JSON.stringify(body) : null,
-      };
-
-      const response = await axios(url, options);
+      const response = await axios({
+        method,
+        url,
+        data: body,
+        headers: { 'Content-Type': 'application/json' },
+      });
       this.toggleLoading(false);
       return response.data;
     } catch (error) {
-      this.toggleLoading(false);
-      throw new Error('Error while sending request: ');
+      throw new Error(
+        error.response ? error.response.data : 'Error while sending request'
+      );
     }
   };
 
